@@ -84,9 +84,36 @@ Note use of quotes around "Student"!
 
 ## A more serious example
 
-Let's subset `officerdata` to look at the data specifically from traffic stops by female officers.
+Let's subset `officerdata` to look at the data specifically for female officers.
 
 (Remember: `officer_female` is a binary indicator.)
+
+```{webr}
+#| edit: false
+#| autorun: true
+#| echo: false
+officerdata <- read.csv('officers.csv')
+```
+
+```{webr}
+female.officers <- 
+head(female.officers)
+```
+
+:::{.notes}
+subset(officerdata, officerdata$officer_female==1)
+:::
+
+## Now let's subset to look at data on *stops conducted by female officers only.*
+
+(hint: you can subset on more than one variable!)
+
+```{webr}
+#| edit: false
+#| autorun: true
+#| echo: false
+officerdata <- read.csv('officers.csv')
+```
 
 ```{webr}
 #| edit: false
@@ -100,13 +127,9 @@ female.officer.stops <-
 head(female.officer.stops)
 ```
 
-:::{.notes}
-subset(officerdata, officerdata$officer_female==1)
-:::
-
 ## Gathering statistics: Using `mean()` within a subset
 
-Let's compare the means of contrabands found among stops between male and female officers.
+Let's compare the rate of contraband found among stops by male and female officers.
 
 ```{webr}
 #| edit: false
@@ -116,7 +139,7 @@ officerdata <- read.csv('officers.csv')
 ```
 
 ```{webr}
-female.officer.stops <- subset(officerdata, officerdata$officer_female == 1)
+female.officer.stops <- subset(officerdata, officerdata$officer_female == 1 & search_occur == 1)
 mean(female.officer.stops$contra)
 ```
 

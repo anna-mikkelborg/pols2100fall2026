@@ -1,7 +1,10 @@
 ---
 title: "Subsetting data"
 subtitle: "Week 2 Lecture 2"
-format: live-revealjs
+format: 
+  live-revealjs:
+    slide-number: true
+    show-slide-number: all
 engine: knitr
 resources:
   - officers.csv

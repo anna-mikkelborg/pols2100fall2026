@@ -9,4 +9,5 @@ format: html
   - [Reference document](Lectures/week2/week2lecture2_reference.html)
   
 # Week 3
-- [Week 3, Lecture 1](Lectures/week3/week3lecture1.html)
+- [Week 3, Lecture 1: One-way and two-way tables in R](Lectures/week3/week3lecture1.html)
+- [Week 3, Lecture 2: Visualizing bivariate distributions in R](Lectures/week3/week3lecture2.html)

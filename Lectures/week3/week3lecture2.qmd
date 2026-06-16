@@ -1,0 +1,180 @@
+---
+title: "Visualizing bivariate distributions in R"
+subtitle: "Week 3 Lecture 2"
+format: 
+  live-revealjs:
+    slide-number: true
+    show-slide-number: all
+engine: knitr
+resources:
+  - happiness_polity_2018.csv
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+## Take two datasets
+
+```{webr}
+#| edit: false
+#| autorun: true
+#| echo: false
+#| message: false
+#| warning: false
+# Load R packages we will need
+library(ggplot2)
+library(datasauRus)
+
+# create datasets
+a_dataset <- datasaurus_dozen[datasaurus_dozen$dataset=="away",2:3]
+rownames(a_dataset) <- NULL
+
+another_dataset <- datasaurus_dozen[datasaurus_dozen$dataset=="dino",2:3]
+rownames(another_dataset) <- NULL
+
+simpson_dataset <- subset(simpsons_paradox, dataset=="simpson_2")[2:3]
+simpson_dataset$age = with(simpson_dataset, 
+                              findInterval(x + y, c(0, 55, 80, 
+    120, 145, 200)))
+simpson_dataset$age = factor(simpson_dataset$age + 10)
+rownames(simpson_dataset) <- NULL
+colnames(simpson_dataset) <- c("hours.tv", "test.score", "age")
+```
+:::{.columns}
+:::{.column width=50%}
+```{webr}
+head(a_dataset)
+```
+:::
+:::{.column width=50%}
+```{webr}
+head(another_dataset)
+```
+:::
+:::
+
+## Huh, their `x` and `y` variables have the same means!
+
+```{webr}
+mean(a_dataset$x)
+mean(a_dataset$y)
+mean(another_dataset$x)
+mean(another_dataset$y)
+```
+
+## Visualizing variables
+
+- We will use the `ggplot2` package in R for building plots
+- To build a **scatterplot,** we use a two-part command:
+
+```r
+# the first part sets up the graph
+ggplot(dataset.name, aes(x = x.variable, y = y.variable)) + 
+# the second part plots the points
+  geom_point()
+  
+# (components of ggplots are separated with a +)
+```
+
+- This plot will give us the **bivariate distribution** of these variables.
+
+## Plotting `x` and `y` from `a_dataset`
+
+```{webr}
+library(ggplot2) # tells R to use the ggplot2 package
+# let's edit this code:
+ggplot(dataset.name, aes(x = x.variable, y = y.variable)) + 
+  geom_point()
+```
+
+## Always plot your data!!
+
+```{webr}
+ggplot(another_dataset, aes(x = x, y = y)) +
+  geom_point()
+```
+
+## Seriously, *always.*
+
+![The Datasaurus Dozen](datasaurus_dozen.png)
+
+:::{.notes}
+The x and y variables in each of these plots have identical means! And a bunch of other characteristics in common that we'll cover later in this class.
+:::
+
+## Let's go back to our happiness data
+
+```{webr}
+happiness_data <- read.csv('happiness_polity_2018.csv')
+head(happiness_data)
+```
+
+## Where we left off on Tuesday
+
+```{webr}
+table(happiness_data$polity2_cat, happiness_data$gdpcapita_cat)
+```
+
+## Visualizing the continuous versions
+
+```{webr}
+# let's make a ggplot of polity2 and gdpcapita
+```
+
+# Which one is better?
+
+## Plotting lines of best fit
+
+```{webr}
+ggplot(happiness_data, aes(x = polity2, y = gdpcapita)) +
+  geom_point() +
+  geom_smooth(method = "lm", level = F)
+```
+
+## Not always a good idea!!
+
+```{webr}
+ggplot(another_dataset, aes(x = x, y = y)) +
+  geom_point() +
+  geom_smooth(method = "lm", level = F)
+```
+
+## Another example
+
+```{webr}
+head(simpson_dataset)
+```
+
+## Time to visualize!
+
+```{webr}
+#| message: false
+#| warning: false
+ggplot(simpson_dataset, aes(x = hours.tv, y = test.score)) +
+  geom_point() + geom_smooth(method = "lm", level = F)
+```
+
+## There's more to the story...
+
+```{webr}
+#| message: false
+#| warning: false
+ggplot(simpson_dataset, # you can put line breaks after any comma
+       aes(x = hours.tv, y = test.score, color = age)) +
+  geom_point() # + geom_smooth(method = "lm", level = F)
+```
+
+## This is **Simpson's Paradox**
+
+Overall patterns may disappear or even reverse when relevant subgroups are analyzed separately!
+
+So what should we do?
+
+- Always visualize your data
+- Always be thinking about theoretically relevant subgroups
+
+## What we have covered
+
+- Using `ggplot` to plot **bivariate distributions**
+- The importance of looking at your data, not just summarizing it
+- Plotting **lines of best fit** and thinking critically about their usefulness
+- **Simpson's Paradox** as a cautionary tale

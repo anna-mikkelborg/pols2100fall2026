@@ -7,7 +7,6 @@ format:
     show-slide-number: all
 engine: knitr
 resources:
-  - polity.jpg
   - happiness_polity_2018.csv
 ---
 

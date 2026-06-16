@@ -3,4 +3,4 @@ title: "POLS 2100 slides"
 format: html
 ---
 
-[Week 2, Lecture 2](Lectures/week2/week1lecture2.html)
+[Week 2, Lecture 2](Lectures/week2/week2lecture2.html)

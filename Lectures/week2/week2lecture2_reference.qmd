@@ -1,0 +1,139 @@
+---
+title: "Subsetting data"
+subtitle: "Week 2 reference"
+format: 
+  live-html:
+    toc: true
+    toc-location: left
+    toc-depth: 2
+    code-tools: true
+    page-layout: full
+webr:
+  render-df: paged-table
+engine: knitr
+resources:
+  - officers.csv
+  - belchers.csv
+  - officers.png
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+This page covers how to pull out part of a dataset in R, using `subset()` and boolean operators. Read it from top to bottom. Every code block runs in your browser, so you can press **Run Code** to see the output, or edit a block and run it again to try a change.
+
+## Today's dataset
+
+![Data from a 2021 *AJPS* article](officers.png)
+
+We work with `officerdata`, a record of traffic stops. Read it in:
+
+```{webr}
+#| autorun: true
+officerdata <- read.csv('officers.csv')
+head(officerdata)   # head() shows the first six rows of a longer dataset
+```
+
+::: {.callout-note title="What the columns mean"}
+- `search_occur` — whether a search was conducted at the stop
+- `contra` — whether contraband was found at the stop
+- `driver_age` — the driver's age, in years
+- `driver_race` — the driver's race (`white`, `poc`)
+- `officer_female` — the officer's gender, a binary indicator (`1` = female)
+:::
+
+## What subsetting is
+
+Often you want only part of a dataset: say, only the stops made by female officers. For that you **subset** the data. The pattern is:
+
+`new.subset <- subset(original.dataset, variable == accepted.value)`
+
+- If the variable holds **text**, wrap the value in quotes: `== 'accepted.value'`.
+- Note the double equals, `==`. It is a **boolean operator**, not an assignment.
+
+## Boolean operators
+
+<table>
+<tr><td colspan="2"><strong>Tests that return a <code>TRUE</code> or <code>FALSE</code> value</strong></td></tr>
+<tr><td><code>==</code></td><td>is equal to</td></tr>
+<tr><td><code>&lt;</code> and <code>&gt;</code></td><td>is less than/greater than</td></tr>
+<tr><td><code>&lt;=</code> and <code>&gt;=</code></td><td>is less than/greater than <em>or equal to</em></td></tr>
+<tr><td><code>!=</code></td><td>is not equal to</td></tr>
+<tr><td colspan="2"><strong>Combining boolean operations</strong></td></tr>
+<tr><td><code>&amp;</code></td><td>and</td></tr>
+<tr><td><code>|</code> (bar)</td><td>or</td></tr>
+</table>
+
+## A first example: the Belcher family
+
+Here is a smaller dataset, `belchers`:
+
+```{webr}
+#| autorun: true
+belchers <- read.csv('belchers.csv')
+belchers
+```
+
+To keep only the Belchers aged 18 and up, subset on the age column with `>=`:
+
+```{webr}
+#| autorun: true
+adult.belchers <- subset(belchers, Age >= 18)
+adult.belchers
+```
+
+`adult.belchers` is a new dataset of its own. You can do anything to it that you could do to `belchers`.
+
+To keep only the Belchers who are students, subset on the text value `Student`. Because the value is text, it goes in quotes:
+
+```{webr}
+#| autorun: true
+student.belchers <- subset(belchers, Occupation == 'Student')
+student.belchers
+```
+
+## A more serious example: stops by female officers
+
+Back to `officerdata`. Because `officer_female` is a binary indicator, the female officers are the rows where it equals `1`:
+
+```{webr}
+#| autorun: true
+female.officers <- subset(officerdata, officer_female == 1)
+head(female.officers)
+```
+
+## Subsetting on more than one variable
+
+You can subset on several conditions at once by joining them with a boolean operator. Here are the stops by female officers in which a search took place, using `&` for "and":
+
+```{webr}
+#| autorun: true
+female.officer.stops <- subset(officerdata, officer_female == 1 & search_occur == 1)
+head(female.officer.stops)
+```
+
+## Using `mean()` within a subset
+
+Subsetting and `mean()` together let you compare groups. Here is the rate of contraband found in searches conducted by female officers:
+
+```{webr}
+#| autorun: true
+female.officer.stops <- subset(officerdata, officer_female == 1 & search_occur == 1)
+mean(female.officer.stops$contra)
+```
+
+And the same rate for searches by non-female officers, the rows where `officer_female` equals `0`:
+
+```{webr}
+#| autorun: true
+nonfemale.officer.stops <- subset(officerdata, officer_female == 0 & search_occur == 1)
+mean(nonfemale.officer.stops$contra)
+```
+
+Comparing the two numbers tells you whether searches by one group turned up contraband more often than searches by the other.
+
+## Skills covered
+
+- `head()` shows the first six rows of a dataset.
+- `subset()` extracts a portion of the data based on the value of one or more variables.
+- **Boolean operators** like `==`, `>=`, and `&` are how you state the values you want.
+- `mean()` gives the average of a numeric variable (review from last time).

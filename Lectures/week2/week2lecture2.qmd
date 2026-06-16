@@ -171,7 +171,7 @@ nonfemale.officer.stops <-
 mean(nonfemale.officer.stops$contra)
 ```
 
-## Skills covered
+## What we have covered
 
 - `head()` shows you the first six rows of a dataset
 - `subset()` lets you extract a portion of the data based on the value of one or more variables

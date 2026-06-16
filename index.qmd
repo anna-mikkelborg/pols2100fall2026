@@ -7,3 +7,6 @@ format: html
 
 - [Week 2, Lecture 2](Lectures/week2/week2lecture2.html)
   - [Reference document](Lectures/week2/week2lecture2_reference.html)
+  
+# Week 3
+- [Week 3, Lecture 1](Lectures/week3/week3lecture1.html)

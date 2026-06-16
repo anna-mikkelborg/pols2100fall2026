@@ -1,0 +1,132 @@
+---
+title: "One-way and two-way tables in R"
+subtitle: "Week 3 Lecture 1"
+format: 
+  live-revealjs:
+    slide-number: true
+    show-slide-number: all
+engine: knitr
+resources:
+  - polity.jpg
+  - happiness_polity_2018.csv
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+## When to use tables
+
+- A useful tool for summarizing your data
+- Especially with **categorical variables**
+  - *e.g.,* the variable `color` could contain categorical values like "blue" and "red"
+- Categorical variables can also summarize **continuous variables**
+  - *e.g.,* we often have an `age` variable but also categorize people using an `age_group` variable
+  
+## Today's dataset
+
+```{webr}
+happiness_data <- read.csv('happiness_polity_2018.csv')
+head(happiness_data)
+```
+
+:::{.notes}
+This dataset contains data from countries around the world on phenomena including happiness levels, political categories, and demographic information.
+
+polity2: The "Polity Score" of the country, which measures its political system on a 21-point scale ranging from -10 (hereditary monarchy) to +10 (consolidated democracy).
+
+polity2_cat: The political category the country is identified within. "autocracies" are on one end of the spectrum, "anocracies" are in the middle (semi-democracies), and "democracies" are at the top of the spectrum.
+
+gdpcapita: GDP per Capita (economic output per person)
+
+gdpcapita_cat: GDP/income category that the country falls into (based on GDP per capita)
+
+happiness: The country's happiness index, measured through surveys that require participants to rank their level of happiness based on an assortment of quality-of-life factors
+
+happiness_cat: Happiness category that the country falls into (based on happpiness indicator)
+
+life_expectancy: Average life expectancy in years
+
+life_expectancy_cat: Life Expectancy category that the country falls into
+:::
+
+## One-way tables
+
+```{webr}
+table(happiness_data$gdpcapita_cat)
+```
+
+
+
+:::{.fragment}
+What would happen if we used `gdpcapita` instead of `gdpcapita_cat`?
+:::
+
+## How about democracy?
+
+Let's make a one-way table using `polity2_cat`
+
+```{webr}
+
+```
+
+Using what we covered last week, how would we look at the political categories only among rich countries (*i.e.,* where `gdpcapita_cat` is equal to `'rich'`)?
+
+## Interpreting one-way tables
+
+- Also called **frequency tables**
+- Give us *counts* of each specific category that is present in a dataset
+- Also useful for understanding what values any type of variable has when you first open an unfamiliar dataset
+
+# What about relationships *between* variables?
+
+## Science in the abstract
+
+- Most scientific research is about relationships between variables
+- We have a **theory** about how variables fit together
+- We develop **hypotheses** --- testable propositions that should hold if the theory is true
+- We find data that allow us to test our hypotheses
+- Based on the results, we re-evaluate our theory
+
+## The theory we will test today
+
+> "As countries develop economically, citizens start demanding more democracy."
+
+- How would we translate this into a hypothesis we can test with our dataset?
+- We are going to have to look at two variables at once...
+
+## Two-way tables
+
+- Command looks like `table(dataset$row.variable, dataset$column.variable)` (think **R**ay **C**harles)
+- Let's group GDP categories with political categories to see how many countries fit into each of the groupings:
+
+```{webr}
+table(happiness_data$polity2_cat, happiness_data$gdpcapita_cat)
+```
+
+## Let's look at this relationship among countries where `happiness` is above 5.
+
+```{webr}
+
+```
+
+:::{.fragment}
+Is this good evidence for the theory that economic development causes countries to become more democratic?
+:::
+
+## P.S. Tables can be stored in variables!
+
+You will be storing the results of tables in variables in your assignments so they can be autograded. It does work!
+
+```{webr}
+happiness.by.gdp <- table(happiness_data$polity2_cat, happiness_data$gdpcapita_cat)
+```
+
+```{webr}
+happiness.by.gdp
+```
+
+## What we have covered
+
+- Tables are useful for (1) exploring datasets and (2) examining categorical variables
+- `table(dataset$variable)` gives you a one-way (frequency) table
+- `table(dataset$row.variable, dataset$column.variable)` gives you a two-way table
+- We introduced the concepts of **theories,** **hypotheses,** and **empirical tests** as components of the scientific process

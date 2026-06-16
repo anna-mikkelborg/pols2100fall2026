@@ -1,0 +1,176 @@
+---
+title: "Subsetting data"
+subtitle: "Week 2 Lecture 2"
+format: live-revealjs
+engine: knitr
+resources:
+  - officers.csv
+  - belchers.csv
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+## Today's dataset
+
+![2021 *AJPS*](officers.png)
+
+## We'll start by reading in the data
+
+```{webr}
+officerdata <- read.csv('officers.csv')
+head(officerdata) # head() shows the first six rows of a longer dataset.
+```
+
+:::{.notes}
+search_occur: whether or not a search was conducted by the officer at that stop
+
+contra: whether or not contraband was found by the officer at that stop
+
+driver_age: age of driver (years)
+
+driver_race: race of driver (white, poc)
+
+officer_female: officer gender
+:::
+
+# What if we just want data on stops by female officers?
+
+## We need to *subset* our data
+
+Like this:
+
+`name.of.new.subset.dataset <- subset(original.dataset, variable.in.dataset == accepted.value)`
+
+- If the variable is a **string,** wrap `accepted.value` in quotations, like this: `== 'accepted.value'`
+- Note `==`
+  - this is a **boolean operator**
+
+## An aside on boolean operators
+
+<table>
+<tr><td colspan="2"><strong>Tests that return a <code>TRUE</code> or <code>FALSE</code> value</strong></td></tr>
+<tr><td><code>==</code></td><td>is equal to</td></tr>
+<tr><td><code>&lt;</code> and <code>&gt;</code></td><td>is less than/greater than</td></tr>
+<tr><td><code>&lt;=</code> and <code>&gt;=</code></td><td>is less than/greater than <em>or equal to</em></td></tr>
+<tr><td><code>!=</code></td><td>is not equal to</td></tr>
+<tr><td colspan="2"><strong>Combining boolean operations</strong></td></tr>
+<tr><td><code>&amp;</code></td><td>and</td></tr>
+<tr><td><code>|</code> (bar)</td><td>or</td></tr>
+</table>
+
+## Remember our `belchers` dataset:
+
+```{webr}
+#| edit: false
+#| autorun: true
+#| echo: false
+belchers <- read.csv('belchers.csv')
+belchers
+```
+
+Let's subset to Belchers 18 and up:
+
+```{webr}
+# subset(original.dataset, variable.in.dataset == accepted.value)
+adult.belchers <- 
+adult.belchers
+```
+
+:::{.notes}
+adult.belchers is an entirely new dataset, and we can do all the things with it that we could do to belchers.
+:::
+
+## How would we subset to only Belchers who are students?
+
+```{r, echo = F}
+belchers <- read.csv('belchers.csv')
+belchers
+```
+
+```{webr}
+student.belchers <- 
+student.belchers
+```
+
+:::{.notes}
+Note use of quotes around "Student"!
+:::
+
+## A more serious example
+
+Let's subset `officerdata` to only stops by female officers.
+
+```{webr}
+#| edit: false
+#| autorun: true
+#| echo: false
+officerdata <- read.csv('officers.csv')
+```
+
+```{webr}
+#| edit: false
+#| autorun: true
+head(officerdata, 3) # you can specify the number of rows in head()!
+```
+
+(Remember: `officer_female` is a **binary indicator.**)
+
+
+```{webr}
+female.officers <- 
+head(female.officers)
+```
+
+:::{.notes}
+subset(officerdata, officer_female==1)
+:::
+
+## Now let's subset to only data on *searches* conducted by *female officers.*
+
+```{webr}
+#| edit: false
+#| autorun: true
+#| echo: false
+officerdata <- read.csv('officers.csv')
+```
+
+```{webr}
+#| edit: false
+#| autorun: true
+head(officerdata, 3)
+```
+
+You can subset on more than one variable! Use a **boolean operator.**
+
+```{webr}
+female.officer.stops <- 
+head(female.officer.stops)
+```
+
+## Using `mean()` within a subset
+
+Let's compare the rate of contraband found among stops by female and non-female (male?) officers.
+
+```{webr}
+#| edit: false
+#| autorun: true
+#| echo: false
+officerdata <- read.csv('officers.csv')
+```
+
+```{webr}
+female.officer.stops <- subset(officerdata, officer_female == 1 & search_occur == 1)
+mean(female.officer.stops$contra)
+```
+
+```{webr}
+nonfemale.officer.stops <- 
+mean(nonfemale.officer.stops$contra)
+```
+
+## Skills covered
+
+- `head()` shows you the first six rows of a dataset
+- `subset()` lets you extract a portion of the data based on the value of one or more variables
+- **Boolean operators** like `==`, `>=`, and `&` are how you specify the values you want
+- Review: `mean()` gives you the average value of a numeric variable

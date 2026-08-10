@@ -5,6 +5,7 @@ format:
   live-revealjs:
     slide-number: true
     show-slide-number: all
+    incremental: true
 engine: knitr
 resources:
   - officers.csv
@@ -120,15 +121,15 @@ head(officerdata, 3) # you can specify the number of rows in head()!
 
 
 ```{webr}
-female.officers <- 
-head(female.officers)
+female.officer.stops <- 
+head(female.officer.stops)
 ```
 
 :::{.notes}
 subset(officerdata, officer_female==1)
 :::
 
-## Now let's subset to only data on *searches* conducted by *female officers.*
+## You can subset based on more than one variable
 
 ```{webr}
 #| edit: false
@@ -143,11 +144,15 @@ officerdata <- read.csv('officers.csv')
 head(officerdata, 3)
 ```
 
-You can subset on more than one variable! Use a **boolean operator.**
+Use a **boolean operator.**
+
+:::{.fragment}
+Let's subset to stops by female officers where the person stopped was under 35.
+:::
 
 ```{webr}
-female.officer.stops <- 
-head(female.officer.stops)
+female.officer.stops.under35 <- 
+head(female.officer.stops.under35)
 ```
 
 ## Using `mean()` within a subset
@@ -162,7 +167,7 @@ officerdata <- read.csv('officers.csv')
 ```
 
 ```{webr}
-female.officer.stops <- subset(officerdata, officer_female == 1 & search_occur == 1)
+female.officer.stops <- subset(officerdata, officer_female == 1)
 mean(female.officer.stops$contra)
 ```
 

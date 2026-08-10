@@ -6,10 +6,10 @@
 <script src="week2lecture2_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="week2lecture2_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="week2lecture2_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="week2lecture2_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="week2lecture2_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="week2lecture2_files/libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
 <link href="week2lecture2_files/libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.37">
+  <meta name="generator" content="quarto-1.9.38">
 
   <title>Subsetting data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -184,10 +184,10 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoib2ZmaWNlcmRhdGEgPC0gcmVh
 <p>Like this:</p>
 <p><code>name.of.new.subset.dataset &lt;- subset(original.dataset, variable.in.dataset == accepted.value)</code></p>
 <ul>
-<li>If the variable is a <strong>string,</strong> wrap <code>accepted.value</code> in quotations, like this: <code>== 'accepted.value'</code></li>
-<li>Note <code>==</code>
+<li class="fragment">If the variable is a <strong>string,</strong> wrap <code>accepted.value</code> in quotations, like this: <code>== 'accepted.value'</code></li>
+<li class="fragment">Note <code>==</code>
 <ul>
-<li>this is a <strong>boolean operator</strong></li>
+<li class="fragment">this is a <strong>boolean operator</strong></li>
 </ul></li>
 </ul>
 </section>
@@ -357,7 +357,7 @@ eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOmZhbHNlLCJldmFsIjp0cnVlfSwiY29kZSI6Imhl
 
 </div>
 <script type="webr-7-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmVtYWxlLm9mZmljZXJzIDwtIFxuaGVhZChmZW1hbGUub2ZmaWNlcnMpIn0=
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmVtYWxlLm9mZmljZXIuc3RvcHMgPC0gXG5oZWFkKGZlbWFsZS5vZmZpY2VyLnN0b3BzKSJ9
 </script>
 </div>
 </div>
@@ -375,8 +375,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmVtYWxlLm9mZmljZXJzIDwt
           display:block!important;
       }</style></aside>
 </section>
-<section id="now-lets-subset-to-only-data-on-searches-conducted-by-female-officers." class="slide level2">
-<h2>Now let’s subset to only data on <em>searches</em> conducted by <em>female officers.</em></h2>
+<section id="you-can-subset-based-on-more-than-one-variable" class="slide level2">
+<h2>You can subset based on more than one variable</h2>
 <div class="cell" data-edit="false" data-autorun="true">
 <div>
 <div id="webr-8" class="exercise-cell">
@@ -397,14 +397,17 @@ eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOmZhbHNlLCJldmFsIjp0cnVlfSwiY29kZSI6Imhl
 </script>
 </div>
 </div>
-<p>You can subset on more than one variable! Use a <strong>boolean operator.</strong></p>
+<p>Use a <strong>boolean operator.</strong></p>
+<div class="fragment">
+<p>Let’s subset to stops by female officers where the person stopped was under 35.</p>
+</div>
 <div class="cell">
 <div>
 <div id="webr-10" class="exercise-cell">
 
 </div>
 <script type="webr-10-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmVtYWxlLm9mZmljZXIuc3RvcHMgPC0gXG5oZWFkKGZlbWFsZS5vZmZpY2VyLnN0b3BzKSJ9
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmVtYWxlLm9mZmljZXIuc3RvcHMudW5kZXIzNSA8LSBcbmhlYWQoZmVtYWxlLm9mZmljZXIuc3RvcHMudW5kZXIzNSkifQ==
 </script>
 </div>
 </div>
@@ -428,7 +431,7 @@ eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1
 
 </div>
 <script type="webr-12-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmVtYWxlLm9mZmljZXIuc3RvcHMgPC0gc3Vic2V0KG9mZmljZXJkYXRhLCBvZmZpY2VyX2ZlbWFsZSA9PSAxICYgc2VhcmNoX29jY3VyID09IDEpXG5tZWFuKGZlbWFsZS5vZmZpY2VyLnN0b3BzJGNvbnRyYSkifQ==
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZmVtYWxlLm9mZmljZXIuc3RvcHMgPC0gc3Vic2V0KG9mZmljZXJkYXRhLCBvZmZpY2VyX2ZlbWFsZSA9PSAxKVxubWVhbihmZW1hbGUub2ZmaWNlci5zdG9wcyRjb250cmEpIn0=
 </script>
 </div>
 </div>
@@ -443,13 +446,13 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibm9uZmVtYWxlLm9mZmljZXIu
 </div>
 </div>
 </section>
-<section id="skills-covered" class="slide level2">
-<h2>Skills covered</h2>
+<section id="what-we-have-covered" class="slide level2">
+<h2>What we have covered</h2>
 <ul>
-<li><code>head()</code> shows you the first six rows of a dataset</li>
-<li><code>subset()</code> lets you extract a portion of the data based on the value of one or more variables</li>
-<li><strong>Boolean operators</strong> like <code>==</code>, <code>&gt;=</code>, and <code>&amp;</code> are how you specify the values you want</li>
-<li>Review: <code>mean()</code> gives you the average value of a numeric variable</li>
+<li class="fragment"><code>head()</code> shows you the first six rows of a dataset</li>
+<li class="fragment"><code>subset()</code> lets you extract a portion of the data based on the value of one or more variables</li>
+<li class="fragment"><strong>Boolean operators</strong> like <code>==</code>, <code>&gt;=</code>, and <code>&amp;</code> are how you specify the values you want</li>
+<li class="fragment">Review: <code>mean()</code> gives you the average value of a numeric variable</li>
 </ul>
 
 <script type="webr-data">

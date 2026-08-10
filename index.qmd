@@ -5,7 +5,7 @@ format: html
 
 # Week 2
 
-- [Week 2, Lecture 1](https://jupyterlab.lmu.edu/hub/user-redirect/git-pull?repo=https://github.com/anna-mikkelborg/pols2100fall2026&urlpath=lab/tree/pols2100/Lectures/week2/Week%202%20Lecture%201.ipynb&branch=main&targetpath=pols2100){target="_blank"} (this particular link will only work if you are connected to campus wifi or VPN)
+- [Week 2, Lecture 1](https://jupyterlab.lmu.edu/hub/user-redirect/git-pull?repo=https://github.com/anna-mikkelborg/pols2100fall2026&urlpath=lab/tree/pols2100/Lectures/week2/Week2_Lecture1.ipynb&branch=main&targetpath=pols2100){target="_blank"} (this particular link will only work if you are connected to campus wifi or VPN)
 - [Week 2, Lecture 2](Lectures/week2/week2lecture2.html){target="_blank"}
   - [Reference document](Lectures/week2/week2lecture2_reference.html){target="_blank"}
   

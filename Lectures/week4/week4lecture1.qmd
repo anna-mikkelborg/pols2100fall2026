@@ -1,0 +1,66 @@
+---
+title: "Variables, theories, and hypotheses: A conceptual deep dive"
+subtitle: "Week 4 Lecture 1"
+format: 
+  live-revealjs:
+    slide-number: true
+    show-slide-number: all
+    incremental: true
+engine: knitr
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+## So far, we've mostly covered hammers
+
+![](maslows_hammer.png){fig-align="center"}
+
+# This week is about nails
+
+(and by nails I mean theories)
+
+## The scientific method
+
+1. Develop a **theory**
+2. General **hypotheses**
+3. Conduct empirical **tests**
+4. **Evaluate** hypotheses
+5. Evaluate the theory
+
+## Terms we will use
+
+- **Theory:** A general framework for explaining some outcome of interest.
+- **Hypothesis:** A *testable prediction* derived from the theory.
+  - Often though not always **causal** in nature
+- **Independent variable:** The thing we hypothesize explains our outcome of interest.
+- **Dependent variable:** Our outcome of interest.
+- **Concept:** The core meaning of a variable
+- **Measure:** How we actually capture or *operationalize* a concept in the real world
+
+## Fitting these terms together
+
+![Kellstedt and Whitten](kellstedt_whitten_1.2.png)
+
+## Revisiting a theory from last week
+
+:::{.fragment}
+> "As countries develop economically, citizens start demanding more democracy."
+
+:::
+
+- What hypotheses can we derive from this theory?
+- What are our independent and dependent variables, conceptually?
+- How could we measure these concepts?
+  - In a perfect world?
+  - With limited access, funding, and time?
+
+## Revisiting our Polity dataset
+
+```{webr}
+happiness_data <- read.csv('happiness_polity_2018.csv')
+head(happiness_data)
+```
+
+- How could we operationalize the concepts of economic development and democracy?
+- What are the advantages of these operationalizations?
+- What are their weaknesses?

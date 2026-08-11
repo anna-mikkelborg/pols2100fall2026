@@ -144,16 +144,12 @@ officerdata <- read.csv('officers.csv')
 head(officerdata, 3)
 ```
 
-Use a **boolean operator.**
-
 :::{.fragment}
-Let's subset to stops by female officers where the person stopped was under 35.
-:::
-
 ```{webr}
 female.officer.stops.under35 <- 
 head(female.officer.stops.under35)
 ```
+:::
 
 ## Using `mean()` within a subset
 
@@ -178,7 +174,7 @@ mean(nonfemale.officer.stops$contra)
 
 ## What we have covered
 
-- `head()` shows you the first six rows of a dataset
+- `head()` shows you the first `n` (default is six) rows of a dataset
 - `subset()` lets you extract a portion of the data based on the value of one or more variables
 - **Boolean operators** like `==`, `>=`, and `&` are how you specify the values you want
 - Review: `mean()` gives you the average value of a numeric variable

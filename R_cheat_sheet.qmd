@@ -1,0 +1,54 @@
+---
+title: "R cheat sheet"
+format: html
+jupyter: python3
+---
+
+## Assigning a value to a variable
+
+`variable.name <- value`
+
+*e.g.,*
+
+`x <- 10`
+
+Variables can contain values including numbers, characters, strings, lists, and datasets.
+
+Variable names can include letters, numbers, underscores, and periods. They must begin with a letter.
+
+## Reading in a dataset
+
+`dataset.name <- read.csv('filename.csv')`
+
+.csv stands for "comma-separated values." .csv files are a common way of storing the kind of data we will use in this class.
+
+## Previewing a dataset
+
+`head(dataset.name)` prints the first six rows of the dataset.
+
+`head(dataset.name, n)` prints the first `n` rows.
+
+## Read a column in a dataset
+
+`dataset.name$variable.name`
+
+## Taking a mean of a column in a dataset
+
+`mean(dataset.name$variable.name)`
+
+## Subsetting data
+
+`name.of.new.subset.dataset <- subset(original.dataset, variable.in.dataset == accepted.value)`
+
+## Boolean operators
+
+<table>
+<tr><td colspan="2"><strong>Tests that return a <code>TRUE</code> or <code>FALSE</code> value</strong></td></tr>
+<tr><td><code>==</code></td><td>is equal to</td></tr>
+<tr><td><code>&lt;</code> and <code>&gt;</code></td><td>is less than/greater than</td></tr>
+<tr><td><code>&lt;=</code> and <code>&gt;=</code></td><td>is less than/greater than <em>or equal to</em></td></tr>
+<tr><td><code>!=</code></td><td>is not equal to</td></tr>
+<tr><td colspan="2"><strong>Combining boolean operations</strong></td></tr>
+<tr><td><code>&amp;</code></td><td>and</td></tr>
+<tr><td><code>|</code> (bar)</td><td>or</td></tr>
+</table>

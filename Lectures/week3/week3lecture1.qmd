@@ -5,6 +5,7 @@ format:
   live-revealjs:
     slide-number: true
     show-slide-number: all
+    incremental: true
 engine: knitr
 resources:
   - happiness_polity_2018.csv
@@ -67,7 +68,10 @@ Let's make a one-way table using `polity2_cat`
 
 ```
 
+:::{.fragment}
+
 Using what we covered last week, how would we look at the political categories only among rich countries (*i.e.,* where `gdpcapita_cat` is equal to `'rich'`)?
+:::
 
 ## Interpreting one-way tables
 
@@ -97,9 +101,11 @@ Using what we covered last week, how would we look at the political categories o
 - Command looks like `table(dataset$row.variable, dataset$column.variable)` (think **R**ay **C**harles)
 - Let's group GDP categories with political categories to see how many countries fit into each of the groupings:
 
+:::{.fragment}
 ```{webr}
 table(happiness_data$polity2_cat, happiness_data$gdpcapita_cat)
 ```
+:::
 
 ## Let's look at this relationship among countries where `happiness` is above 5.
 

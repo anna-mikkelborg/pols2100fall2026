@@ -6,10 +6,10 @@
 <script src="week3lecture1_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="week3lecture1_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="week3lecture1_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="week3lecture1_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="week3lecture1_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="week3lecture1_files/libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
 <link href="week3lecture1_files/libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.37">
+  <meta name="generator" content="quarto-1.9.38">
 
   <title>One-way and two-way tables in R</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -143,14 +143,14 @@
 <section id="when-to-use-tables" class="slide level2">
 <h2>When to use tables</h2>
 <ul>
-<li>A useful tool for summarizing your data</li>
-<li>Especially with <strong>categorical variables</strong>
+<li class="fragment">A useful tool for summarizing your data</li>
+<li class="fragment">Especially with <strong>categorical variables</strong>
 <ul>
-<li><em>e.g.,</em> the variable <code>color</code> could contain categorical values like “blue” and “red”</li>
+<li class="fragment"><em>e.g.,</em> the variable <code>color</code> could contain categorical values like “blue” and “red”</li>
 </ul></li>
-<li>Categorical variables can also summarize <strong>continuous variables</strong>
+<li class="fragment">Categorical variables can also summarize <strong>continuous variables</strong>
 <ul>
-<li><em>e.g.,</em> we often have an <code>age</code> variable but also categorize people using an <code>age_group</code> variable</li>
+<li class="fragment"><em>e.g.,</em> we often have an <code>age</code> variable but also categorize people using an <code>age_group</code> variable</li>
 </ul></li>
 </ul>
 </section>
@@ -217,14 +217,16 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIn0=
 </script>
 </div>
 </div>
+<div class="fragment">
 <p>Using what we covered last week, how would we look at the political categories only among rich countries (<em>i.e.,</em> where <code>gdpcapita_cat</code> is equal to <code>'rich'</code>)?</p>
+</div>
 </section>
 <section id="interpreting-one-way-tables" class="slide level2">
 <h2>Interpreting one-way tables</h2>
 <ul>
-<li>Also called <strong>frequency tables</strong></li>
-<li>Give us <em>counts</em> of each specific category that is present in a dataset</li>
-<li>Also useful for understanding what values any type of variable has when you first open an unfamiliar dataset</li>
+<li class="fragment">Also called <strong>frequency tables</strong></li>
+<li class="fragment">Give us <em>counts</em> of each specific category that is present in a dataset</li>
+<li class="fragment">Also useful for understanding what values any type of variable has when you first open an unfamiliar dataset</li>
 </ul>
 </section>
 <section>
@@ -235,11 +237,11 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIn0=
 <section id="science-in-the-abstract" class="slide level2">
 <h2>Science in the abstract</h2>
 <ul>
-<li>Most scientific research is about relationships between variables</li>
-<li>We have a <strong>theory</strong> about how variables fit together</li>
-<li>We develop <strong>hypotheses</strong> — testable propositions that should hold if the theory is true</li>
-<li>We find data that allow us to test our hypotheses</li>
-<li>Based on the results, we re-evaluate our theory</li>
+<li class="fragment">Most scientific research is about relationships between variables</li>
+<li class="fragment">We have a <strong>theory</strong> about how variables fit together</li>
+<li class="fragment">We develop <strong>hypotheses</strong> — testable propositions that should hold if the theory is true</li>
+<li class="fragment">We find data that allow us to test our hypotheses</li>
+<li class="fragment">Based on the results, we re-evaluate our theory</li>
 </ul>
 </section>
 <section id="the-theory-we-will-test-today" class="slide level2">
@@ -248,16 +250,17 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIn0=
 <p>“As countries develop economically, citizens start demanding more democracy.”</p>
 </blockquote>
 <ul>
-<li>How would we translate this into a hypothesis we can test with our dataset?</li>
-<li>We are going to have to look at two variables at once…</li>
+<li class="fragment">How would we translate this into a hypothesis we can test with our dataset?</li>
+<li class="fragment">We are going to have to look at two variables at once…</li>
 </ul>
 </section>
 <section id="two-way-tables" class="slide level2">
 <h2>Two-way tables</h2>
 <ul>
-<li>Command looks like <code>table(dataset$row.variable, dataset$column.variable)</code> (think <strong>R</strong>ay <strong>C</strong>harles)</li>
-<li>Let’s group GDP categories with political categories to see how many countries fit into each of the groupings:</li>
+<li class="fragment">Command looks like <code>table(dataset$row.variable, dataset$column.variable)</code> (think <strong>R</strong>ay <strong>C</strong>harles)</li>
+<li class="fragment">Let’s group GDP categories with political categories to see how many countries fit into each of the groupings:</li>
 </ul>
+<div class="fragment">
 <div class="cell">
 <div>
 <div id="webr-4" class="exercise-cell">
@@ -266,6 +269,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIn0=
 <script type="webr-4-contents">
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGFibGUoaGFwcGluZXNzX2RhdGEkcG9saXR5Ml9jYXQsIGhhcHBpbmVzc19kYXRhJGdkcGNhcGl0YV9jYXQpIn0=
 </script>
+</div>
 </div>
 </div>
 </section>
@@ -312,10 +316,10 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaGFwcGluZXNzLmJ5LmdkcCJ9
 <section id="what-we-have-covered" class="slide level2">
 <h2>What we have covered</h2>
 <ul>
-<li>Tables are useful for (1) exploring datasets and (2) examining categorical variables</li>
-<li><code>table(dataset$variable)</code> gives you a one-way (frequency) table</li>
-<li><code>table(dataset$row.variable, dataset$column.variable)</code> gives you a two-way table</li>
-<li>We introduced the concepts of <strong>theories,</strong> <strong>hypotheses,</strong> and <strong>empirical tests</strong> as components of the scientific process</li>
+<li class="fragment">Tables are useful for (1) exploring datasets and (2) examining categorical variables</li>
+<li class="fragment"><code>table(dataset$variable)</code> gives you a one-way (frequency) table</li>
+<li class="fragment"><code>table(dataset$row.variable, dataset$column.variable)</code> gives you a two-way table</li>
+<li class="fragment">We introduced the concepts of <strong>theories,</strong> <strong>hypotheses,</strong> and <strong>empirical tests</strong> as components of the scientific process</li>
 </ul>
 
 <script type="webr-data">
@@ -333,7 +337,7 @@ eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC03IiwiaW5saW5lIjpmYWxzZSwibWV0
 </div>
 </div>
 <script type="vfs-file">
-WyJwb2xpdHkuanBnIiwiaGFwcGluZXNzX3BvbGl0eV8yMDE4LmNzdiJd
+WyJoYXBwaW5lc3NfcG9saXR5XzIwMTguY3N2Il0=
 </script>
 </section></section>
     </div>

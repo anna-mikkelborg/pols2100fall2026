@@ -6,10 +6,10 @@
 <script src="week3lecture2_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="week3lecture2_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="week3lecture2_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="week3lecture2_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="week3lecture2_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="week3lecture2_files/libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
 <link href="week3lecture2_files/libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.37">
+  <meta name="generator" content="quarto-1.9.38">
 
   <title>Visualizing bivariate distributions in R</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -243,33 +243,38 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaGVhZChhbm90aGVyX2RhdGFz
 </div>
 </div></div>
 </section>
-<section id="huh-their-x-and-y-variables-have-the-same-means" class="slide level2">
-<h2>Huh, their <code>x</code> and <code>y</code> variables have the same means!</h2>
+<section id="take-the-means-of-each-variable" class="slide level2">
+<h2>Take the means of each variable</h2>
 <div class="cell">
 <div>
 <div id="webr-4" class="exercise-cell">
 
 </div>
 <script type="webr-4-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibWVhbihhX2RhdGFzZXQkeClcbm1lYW4oYV9kYXRhc2V0JHkpXG5tZWFuKGFub3RoZXJfZGF0YXNldCR4KVxubWVhbihhbm90aGVyX2RhdGFzZXQkeSkifQ==
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBtZWFucyBvZiB4IGFuZCB5IGluIGFfZGF0YXNldCBhbmQgYW5vdGhlcl9kYXRhc2V0In0=
 </script>
 </div>
+</div>
+<div class="fragment">
+<p>Interesting…</p>
 </div>
 </section>
 <section id="visualizing-variables" class="slide level2">
 <h2>Visualizing variables</h2>
 <ul>
-<li>We will use the <code>ggplot2</code> package in R for building plots</li>
-<li>To build a <strong>scatterplot,</strong> we use a two-part command:</li>
+<li class="fragment">We will use the <code>ggplot2</code> package in R for building plots</li>
+<li class="fragment">To build a <strong>scatterplot,</strong> we use a two-part command:</li>
 </ul>
+<div class="{fragment}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="co"># the first part sets up the graph</span></span>
 <span id="cb1-2"><a href=""></a><span class="fu">ggplot</span>(dataset.name, <span class="fu">aes</span>(<span class="at">x =</span> x.variable, <span class="at">y =</span> y.variable)) <span class="sc">+</span> </span>
 <span id="cb1-3"><a href=""></a><span class="co"># the second part plots the points</span></span>
 <span id="cb1-4"><a href=""></a>  <span class="fu">geom_point</span>()</span>
 <span id="cb1-5"><a href=""></a>  </span>
-<span id="cb1-6"><a href=""></a><span class="co"># (components of ggplots are separated with a +)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-6"><a href=""></a><span class="co"># (note that components of ggplots are separated with a +)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <ul>
-<li>This plot will give us the <strong>bivariate distribution</strong> of these variables.</li>
+<li class="fragment">This plot will give us the <strong>bivariate distribution</strong> of these variables.</li>
 </ul>
 </section>
 <section id="plotting-x-and-y-from-a_dataset" class="slide level2">
@@ -280,41 +285,28 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibWVhbihhX2RhdGFzZXQkeClc
 
 </div>
 <script type="webr-5-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGlicmFyeShnZ3Bsb3QyKSAjIHRlbGxzIFIgdG8gdXNlIHRoZSBnZ3Bsb3QyIHBhY2thZ2VcbiMgbGV0J3MgZWRpdCB0aGlzIGNvZGU6XG5nZ3Bsb3QoZGF0YXNldC5uYW1lLCBhZXMoeCA9IHgudmFyaWFibGUsIHkgPSB5LnZhcmlhYmxlKSkgKyBcbiAgZ2VvbV9wb2ludCgpIn0=
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBsZXQncyBlZGl0IHRoaXMgY29kZTpcbmdncGxvdChkYXRhc2V0Lm5hbWUsIGFlcyh4ID0geC52YXJpYWJsZSwgeSA9IHkudmFyaWFibGUpKSArIFxuICBnZW9tX3BvaW50KCkifQ==
 </script>
 </div>
 </div>
 </section>
-<section id="always-plot-your-data" class="slide level2">
-<h2>Always plot your data!!</h2>
+<section id="now-lets-do-another_dataset" class="slide level2">
+<h2>Now let’s do <code>another_dataset</code></h2>
 <div class="cell">
 <div>
 <div id="webr-6" class="exercise-cell">
 
 </div>
 <script type="webr-6-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZ2dwbG90KGFub3RoZXJfZGF0YXNldCwgYWVzKHggPSB4LCB5ID0geSkpICtcbiAgZ2VvbV9wb2ludCgpIn0=
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIn0=
 </script>
 </div>
 </div>
 </section>
-<section id="seriously-always." class="slide level2">
-<h2>Seriously, <em>always.</em></h2>
+<section id="always-plot-your-data" class="slide level2">
+<h2>Always plot your data!</h2>
 
-<img data-src="datasaurus_dozen.png" class="r-stretch quarto-figure-center"><p class="caption">The Datasaurus Dozen</p><aside class="notes">
-<p>The x and y variables in each of these plots have identical means! And a bunch of other characteristics in common that we’ll cover later in this class.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
+<img data-src="datasaurus_dozen.png" class="r-stretch quarto-figure-center"><p class="caption">The Datasaurus Dozen</p></section>
 <section id="lets-go-back-to-our-happiness-data" class="slide level2">
 <h2>Let’s go back to our happiness data</h2>
 <div class="cell">
@@ -349,14 +341,14 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGFibGUoaGFwcGluZXNzX2Rh
 
 </div>
 <script type="webr-9-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBsZXQncyBtYWtlIGEgZ2dwbG90IG9mIHBvbGl0eTIgYW5kIGdkcGNhcGl0YSJ9
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBsZXQncyBtYWtlIGEgZ2dwbG90IG9mIHBvbGl0eTIgYW5kIGdkcGNhcGl0YSBpbiBoYXBwaW5lc3NfZGF0YSJ9
 </script>
 </div>
 </div>
 </section>
 <section>
-<section id="which-one-is-better" class="title-slide slide level1 center">
-<h1>Which one is better?</h1>
+<section id="which-one-is-better-tables-or-plots" class="title-slide slide level1 center">
+<h1>Which one is better, tables or plots?</h1>
 
 </section>
 <section id="plotting-lines-of-best-fit" class="slide level2">
@@ -429,17 +421,17 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsIm1lc3NhZ2UiOmZhbHNlLCJ3YXJuaW5nIjpm
 <p>Overall patterns may disappear or even reverse when relevant subgroups are analyzed separately!</p>
 <p>So what should we do?</p>
 <ul>
-<li>Always visualize your data</li>
-<li>Always be thinking about theoretically relevant subgroups</li>
+<li class="fragment">Always visualize your data</li>
+<li class="fragment">Always be thinking about theoretically relevant subgroups</li>
 </ul>
 </section>
 <section id="what-we-have-covered" class="slide level2">
 <h2>What we have covered</h2>
 <ul>
-<li>Using <code>ggplot</code> to plot <strong>bivariate distributions</strong></li>
-<li>The importance of looking at your data, not just summarizing it</li>
-<li>Plotting <strong>lines of best fit</strong> and thinking critically about their usefulness</li>
-<li><strong>Simpson’s Paradox</strong> as a cautionary tale</li>
+<li class="fragment">Using <code>ggplot</code> to plot <strong>bivariate distributions</strong></li>
+<li class="fragment">The importance of looking at your data, not just summarizing it</li>
+<li class="fragment">Plotting <strong>lines of best fit</strong> and thinking critically about their usefulness</li>
+<li class="fragment"><strong>Simpson’s Paradox</strong> is a cautionary tale</li>
 </ul>
 
 <script type="webr-data">

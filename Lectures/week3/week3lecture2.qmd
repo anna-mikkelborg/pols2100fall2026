@@ -5,6 +5,7 @@ format:
   live-revealjs:
     slide-number: true
     show-slide-number: all
+    incremental: true
 engine: knitr
 resources:
   - happiness_polity_2018.csv
@@ -52,19 +53,22 @@ head(another_dataset)
 :::
 :::
 
-## Huh, their `x` and `y` variables have the same means!
+## Take the means of each variable
 
 ```{webr}
-mean(a_dataset$x)
-mean(a_dataset$y)
-mean(another_dataset$x)
-mean(another_dataset$y)
+# means of x and y in a_dataset and another_dataset
 ```
+
+:::{.fragment}
+Interesting...
+:::
 
 ## Visualizing variables
 
 - We will use the `ggplot2` package in R for building plots
 - To build a **scatterplot,** we use a two-part command:
+
+:::{fragment}
 
 ```r
 # the first part sets up the graph
@@ -72,34 +76,38 @@ ggplot(dataset.name, aes(x = x.variable, y = y.variable)) +
 # the second part plots the points
   geom_point()
   
-# (components of ggplots are separated with a +)
+# (note that components of ggplots are separated with a +)
 ```
+
+:::
 
 - This plot will give us the **bivariate distribution** of these variables.
 
 ## Plotting `x` and `y` from `a_dataset`
 
-```{webr}
+```{web}
+#| edit: false
+#| autorun: true
+#| echo: false
 library(ggplot2) # tells R to use the ggplot2 package
+```
+
+```{webr}
 # let's edit this code:
 ggplot(dataset.name, aes(x = x.variable, y = y.variable)) + 
   geom_point()
 ```
 
-## Always plot your data!!
+## Now let's do `another_dataset`
 
 ```{webr}
-ggplot(another_dataset, aes(x = x, y = y)) +
-  geom_point()
+
 ```
 
-## Seriously, *always.*
+## Always plot your data!
 
 ![The Datasaurus Dozen](datasaurus_dozen.png)
 
-:::{.notes}
-The x and y variables in each of these plots have identical means! And a bunch of other characteristics in common that we'll cover later in this class.
-:::
 
 ## Let's go back to our happiness data
 
@@ -117,14 +125,14 @@ table(happiness_data$polity2_cat, happiness_data$gdpcapita_cat)
 ## Visualizing the continuous versions
 
 ```{webr}
-# let's make a ggplot of polity2 and gdpcapita
+# let's make a ggplot of polity2 and gdpcapita in happiness_data
 ```
 
-# Which one is better?
+# Which one is better, tables or plots?
 
 ## Plotting lines of best fit
 
-```{webr}
+```{webr, message = F}
 ggplot(happiness_data, aes(x = polity2, y = gdpcapita)) +
   geom_point() +
   geom_smooth(method = "lm", level = F)
@@ -132,7 +140,7 @@ ggplot(happiness_data, aes(x = polity2, y = gdpcapita)) +
 
 ## Not always a good idea!!
 
-```{webr}
+```{webr, message = F}
 ggplot(another_dataset, aes(x = x, y = y)) +
   geom_point() +
   geom_smooth(method = "lm", level = F)
@@ -177,4 +185,4 @@ So what should we do?
 - Using `ggplot` to plot **bivariate distributions**
 - The importance of looking at your data, not just summarizing it
 - Plotting **lines of best fit** and thinking critically about their usefulness
-- **Simpson's Paradox** as a cautionary tale
+- **Simpson's Paradox** is a cautionary tale

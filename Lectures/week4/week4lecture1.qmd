@@ -19,6 +19,21 @@ engine: knitr
 
 (and by nails I mean theories)
 
+## Lawyers and scientists
+
+- Both start from a particular point of view (my client is innocent; my theory is correct)
+- But they move in **opposite** directions from there:
+  - Lawyers look for the evidence that is most likely to win them the case
+  - Scientists look for the evidence that is most likely to **disprove** their theory
+- Theories are never *proven,* only *supported*
+- Ruthless criticism is scientists' love language 🥲
+
+## In this class, you are a scientist
+
+- Your research proposal is due next Friday!
+- You will be stating a research question, identifying independent and dependent variables, and formulating a hypothesis your study will test
+- This week, we are covering how to do all of that
+
 ## The scientific method
 
 1. Develop a **theory**
@@ -27,19 +42,44 @@ engine: knitr
 4. **Evaluate** hypotheses
 5. Evaluate the theory
 
-## Terms we will use
+## We start with a theory
 
-- **Theory:** A general framework for explaining some outcome of interest.
-- **Hypothesis:** A *testable prediction* derived from the theory.
-  - Often though not always **causal** in nature
-- **Independent variable:** The thing we hypothesize explains our outcome of interest.
-- **Dependent variable:** Our outcome of interest.
-- **Concept:** The core meaning of a variable
-- **Measure:** How we actually capture or *operationalize* a concept in the real world
+- A conjecture about the causes of some outcome of interest
+  - Tentative
+  - Generally causal
+  - About something interesting
+- Consists of an **independent variable,** a **dependent variable,** and the nature of the relationship between them
 
-## Fitting these terms together
+:::{.fragment}
+> Example: "Better economic performance causes greater support for incumbents."
+
+:::
+
+## From concepts to measures
+
+> "Better economic performance causes greater support for incumbents."
+
+- What is our independent variable?
+- What is our dependent variable?
+- How could we **operationalize** each of these concepts?
+
+## From theory to hypothesis
 
 ![Kellstedt and Whitten](kellstedt_whitten_1.2.png)
+
+## Option 1
+
+```{r}
+
+```
+
+## Option 2
+
+```{r}
+
+```
+
+
 
 ## Revisiting a theory from last week
 

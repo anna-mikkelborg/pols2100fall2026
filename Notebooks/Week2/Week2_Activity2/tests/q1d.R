@@ -6,7 +6,10 @@ test = list(
       name = NA,
       points = 1.0,
       code = {
-        . = ottr::check("tests/q1d.R")
+        female.officer.searches.sol <- subset(officerdata, officer_female == 1 & search_occur == 1)
+                question.correct <- mean(female.officer.searches.sol$contra) == female.officer.prop.searches.find.contra
+                testthat::expect_true(question.correct,
+                   info = "Make sure you're subsetting the data correctly and taking the mean of the right variable.")
       }
     )
   )

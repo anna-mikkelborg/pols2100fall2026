@@ -6,7 +6,10 @@ test = list(
       name = NA,
       points = 1.0,
       code = {
-        . = ottr::check("tests/q1b.R")
+        prop.search.occur.test <- mean(officerdata$search_occur[officerdata$officer_female == 1])
+        question.correct <- female.officer.search.rate == prop.search.occur.test
+        testthat::expect_true(question.correct,
+                 info = "Make sure you're taking the mean of the correct variable in the correct dataset (and doing nothing else!)")
       }
     )
   )

@@ -1,0 +1,69 @@
+---
+title: "Week 1, Class 1"
+subtitle: "POLS 2100"
+format: 
+  revealjs:
+    slide-number: true
+    show-slide-number: all
+    incremental: true
+engine: knitr
+---
+
+
+## Welcome to POLS 2100!
+
+While you are waiting for class to start...
+
+::: nonincremental
+1.  Go to jupyterlab.lmu.edu
+2.  Click "Sign up to create a new user"
+3.  Enter your information
+4.  Click "create user"
+5.  Send a mental "thank you" to LMU IT
+:::
+
+I will explain in a bit!
+
+## What this class is about
+
+- Learning about the political world by analyzing quantitative data
+- In particular, evaluating **causal relationships** in politics
+  - Does campaign advertising actually work?
+  - Do representatives discriminate against constituents of color?
+  - Could building more affordable housing lead to gentrification?
+- Growing as a **reader** and developing as a **researcher**
+
+## What you will learn
+
+- Foundational concepts in statistics for causal inference
+- Elements of social science research design
+- Introductory R programming skills
+
+::: fragment
+*No prior experience is expected or required!*
+:::
+
+## Introductions
+
+Tell us your:
+
+- Name
+- Year at LMU
+- Favorite class you've taken so far OR one you're excited about this term (besides this one)
+
+# Syllabus
+
+# Brightspace
+
+## Your first Jupyter Notebook
+
+1. In Brightspace, navigate to the Week 1 Activity 1 link in the Notebooks module
+2. Click the link (you should now have access using the account you created at the start of class!)
+3. Complete the Week 1 Activity 1 notebook
+4. Follow the instructions at the end of the notebook to submit on Gradescope (link is at the top of the Notebooks module)
+
+:::{.fragment}
+Feel free to head out once you're done. 
+
+No class on Thursday; see you next week!
+:::

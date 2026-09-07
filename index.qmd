@@ -3,6 +3,10 @@ title: "POLS 2100 slides"
 format: html
 ---
 
+# Week 1
+
+- [Week 1, Lecture 1](Lectures/week1/week1lecture1.html){target="_blank"}
+
 # Week 2
 
 - [Week 2, Lecture 1](https://jupyterlab.lmu.edu/hub/user-redirect/git-pull?repo=https://github.com/anna-mikkelborg/pols2100fall2026&urlpath=lab/tree/pols2100/Lectures/week2/Week2_Lecture1.ipynb&branch=main&targetpath=pols2100){target="_blank"} (this particular link will only work if you are connected to campus wifi or VPN)

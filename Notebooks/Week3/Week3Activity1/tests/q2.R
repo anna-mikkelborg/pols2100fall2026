@@ -4,7 +4,7 @@ test = list(
     ottr::TestCase$new(
       hidden = FALSE,
       name = NA,
-      points = 0.5,
+      points = 0.0,
       code = {
         question.correct <- identical(low.income.countries, subset(happiness_data, gdpcapita_cat == 'low-income'))
         testthat::expect_true(question.correct, info = "Recall subset(data, colname == 'something')")
@@ -13,7 +13,7 @@ test = list(
     ottr::TestCase$new(
       hidden = FALSE,
       name = NA,
-      points = 0.5,
+      points = 0.0,
       code = {
         low.inc.subset <- subset(happiness_data, gdpcapita_cat == 'low-income')
         question.correct <- identical( low.income.happiness.table , table(low.inc.subset$happiness_cat) )

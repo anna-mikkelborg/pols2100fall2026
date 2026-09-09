@@ -4,7 +4,7 @@ test = list(
     ottr::TestCase$new(
       hidden = FALSE,
       name = NA,
-      points = 1.0,
+      points = 0.0,
       code = {
         question.correct <- is.table(my.table.idea) & dim(my.table.idea)[2] > 0
         testthat::expect_true(question.correct,

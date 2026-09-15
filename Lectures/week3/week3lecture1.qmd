@@ -13,6 +13,27 @@ resources:
 
 {{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
 
+## Viewing feedback on your Thursday notebooks
+
+- Go to Gradescope (links in Brightspace)
+- Click into the assignment you want to view
+- To view the submission itself, click 'Code' and click on the .ipynb file
+- The right-hand sidebar will show your points per question
+- Click into a question to view feedback on open-ended questions where you lost points
+
+## Last Thursday, Q4 was tough {.smaller}
+
+:::{.columns}
+:::{.column width=50%}
+![](question4.png)
+:::
+:::{.column width=50%}
+**Question 4.** Suppose you work in the Mayor's office of a City and are trying to evaluate the performance of individual police officers. Do you think the proportion of stops where officers find contraband, or the proportions of searches where they find contraband, are a good indicator of the effectiveness/performance of police officers? Why or why not? **What are the pros and cons of these metrics?**
+:::
+:::
+
+# Today: tabulating your data in R
+
 ## When to use tables
 
 - A useful tool for summarizing your data
@@ -26,6 +47,35 @@ resources:
 ```{webr}
 happiness_data <- read.csv('happiness_polity_2018.csv')
 head(happiness_data)
+```
+
+## Codebook (also in your notebook!)
+
+```{r}
+library(knitr)
+library(kableExtra)
+
+vars <- data.frame(
+  Variable = c(
+    "polity2", "polity2_cat", "gdpcapita", "gdpcapita_cat",
+    "happiness", "happiness_cat", "life_expectancy", "life_expectancy_cat"
+  ),
+  Description = c(
+    "Polity Score: 21-point scale from -10 (hereditary monarchy) to +10 (consolidated democracy)",
+    "Political category: autocracies, anocracies (semi-democracies), or democracies",
+    "GDP per capita (economic output per person)",
+    "Income category based on GDP per capita",
+    "Happiness index from surveys on quality-of-life factors",
+    "Happiness category based on the happiness index",
+    "Average life expectancy, in years",
+    "Life expectancy category based on the life expectancy value"
+  )
+)
+
+kable(vars, format = "html", col.names = c("Variable", "Description")) %>%
+  kable_styling(font_size = 18, full_width = FALSE) %>%
+  column_spec(1, monospace = TRUE, width = "3cm") %>%
+  column_spec(2, width = "9cm")
 ```
 
 :::{.notes}
@@ -50,7 +100,15 @@ life_expectancy_cat: Life Expectancy category that the country falls into
 
 ## One-way tables
 
+- Also called **frequency tables**
+- Give us *counts* of each specific category that is present in a dataset
+- Also useful for understanding what values any type of variable has when you first open an unfamiliar dataset
+- R command looks like this: `table(dataset.name$variable.name)`
+
+## One-way tables
+
 ```{webr}
+# how many countries in our dataset fall into each income category?
 table(happiness_data$gdpcapita_cat)
 ```
 
@@ -60,9 +118,9 @@ table(happiness_data$gdpcapita_cat)
 What would happen if we used `gdpcapita` instead of `gdpcapita_cat`?
 :::
 
-## How about democracy?
+## How about political categories?
 
-Let's make a one-way table using `polity2_cat`
+Let's make a one-way table using the `polity2_cat` variable in `happiness_data.`
 
 ```{webr}
 
@@ -73,11 +131,7 @@ Let's make a one-way table using `polity2_cat`
 Using what we covered last week, how would we look at the political categories only among rich countries (*i.e.,* where `gdpcapita_cat` is equal to `'rich'`)?
 :::
 
-## Interpreting one-way tables
 
-- Also called **frequency tables**
-- Give us *counts* of each specific category that is present in a dataset
-- Also useful for understanding what values any type of variable has when you first open an unfamiliar dataset
 
 # What about relationships *between* variables?
 
@@ -96,9 +150,9 @@ Using what we covered last week, how would we look at the political categories o
 - How would we translate this into a hypothesis we can test with our dataset?
 - We are going to have to look at two variables at once...
 
-## Two-way tables
+## Two-way tables {.smaller}
 
-- Command looks like `table(dataset$row.variable, dataset$column.variable)` (think **R**ay **C**harles)
+- Command looks like `table(dataset.name$row.variable.name, dataset.name$column.variable.name)` (think **R**ay **C**harles)
 - Let's group GDP categories with political categories to see how many countries fit into each of the groupings:
 
 :::{.fragment}
@@ -106,12 +160,6 @@ Using what we covered last week, how would we look at the political categories o
 table(happiness_data$polity2_cat, happiness_data$gdpcapita_cat)
 ```
 :::
-
-## Let's look at this relationship among countries where `happiness` is above 5.
-
-```{webr}
-
-```
 
 :::{.fragment}
 Is this good evidence for the theory that economic development causes countries to become more democratic?
@@ -122,7 +170,8 @@ Is this good evidence for the theory that economic development causes countries 
 You will be storing the results of tables in variables in your assignments so they can be autograded. It does work!
 
 ```{webr}
-happiness.by.gdp <- table(happiness_data$polity2_cat, happiness_data$gdpcapita_cat)
+happiness.by.gdp <- table(happiness_data$polity2_cat, 
+                          happiness_data$gdpcapita_cat)
 ```
 
 ```{webr}
@@ -132,6 +181,6 @@ happiness.by.gdp
 ## What we have covered
 
 - Tables are useful for (1) exploring datasets and (2) examining categorical variables
-- `table(dataset$variable)` gives you a one-way (frequency) table
-- `table(dataset$row.variable, dataset$column.variable)` gives you a two-way table
+- `table(dataset.name$variable.name)` gives you a one-way (frequency) table
+- `table(dataset.name$row.variable.name, dataset.name$column.variable.name)` gives you a two-way table
 - We introduced the concepts of **theories,** **hypotheses,** and **empirical tests** as components of the scientific process

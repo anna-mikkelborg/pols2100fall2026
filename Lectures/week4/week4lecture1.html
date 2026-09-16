@@ -6,10 +6,10 @@
 <script src="week4lecture1_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="week4lecture1_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="week4lecture1_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="week4lecture1_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="week4lecture1_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="week4lecture1_files/libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
 <link href="week4lecture1_files/libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.38">
+  <meta name="generator" content="quarto-1.10.18">
 
   <title>Variables, theories, and hypotheses: A conceptual deep dive</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -21,10 +21,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -149,6 +152,27 @@
 <h1>This week is about nails</h1>
 <p>(and by nails I mean theories)</p>
 </section>
+<section id="lawyers-and-scientists" class="slide level2">
+<h2>Lawyers and scientists</h2>
+<ul>
+<li class="fragment">Both start from a particular point of view (my client is innocent; my theory is correct)</li>
+<li class="fragment">But they move in <strong>opposite</strong> directions from there:
+<ul>
+<li class="fragment">Lawyers look for the evidence that is most likely to win them the case</li>
+<li class="fragment">Scientists look for the evidence that is most likely to <strong>disprove</strong> their theory</li>
+</ul></li>
+<li class="fragment">Theories are never <em>proven,</em> only <em>supported</em></li>
+<li class="fragment">Ruthless criticism is scientists’ love language 🥲</li>
+</ul>
+</section>
+<section id="in-this-class-you-are-a-scientist" class="slide level2">
+<h2>In this class, you are a scientist</h2>
+<ul>
+<li class="fragment">Your research proposal is due next Friday!</li>
+<li class="fragment">You will be stating a research question, identifying independent and dependent variables, and formulating a hypothesis your study will test</li>
+<li class="fragment">This week, we are covering how to do all of that</li>
+</ul>
+</section>
 <section id="the-scientific-method" class="slide level2">
 <h2>The scientific method</h2>
 <ol type="1">
@@ -159,24 +183,149 @@
 <li class="fragment">Evaluate the theory</li>
 </ol>
 </section>
-<section id="terms-we-will-use" class="slide level2">
-<h2>Terms we will use</h2>
+<section id="we-start-with-a-theory" class="slide level2">
+<h2>We start with a theory</h2>
 <ul>
-<li class="fragment"><strong>Theory:</strong> A general framework for explaining some outcome of interest.</li>
-<li class="fragment"><strong>Hypothesis:</strong> A <em>testable prediction</em> derived from the theory.
+<li class="fragment">A conjecture about the causes of some outcome of interest
 <ul>
-<li class="fragment">Often though not always <strong>causal</strong> in nature</li>
+<li class="fragment">Tentative</li>
+<li class="fragment">Generally causal</li>
+<li class="fragment">About something interesting</li>
 </ul></li>
-<li class="fragment"><strong>Independent variable:</strong> The thing we hypothesize explains our outcome of interest.</li>
-<li class="fragment"><strong>Dependent variable:</strong> Our outcome of interest.</li>
-<li class="fragment"><strong>Concept:</strong> The core meaning of a variable</li>
-<li class="fragment"><strong>Measure:</strong> How we actually capture or <em>operationalize</em> a concept in the real world</li>
+<li class="fragment">Consists of an <strong>independent variable,</strong> a <strong>dependent variable,</strong> and the nature of the relationship between them</li>
+</ul>
+<div class="fragment">
+<blockquote>
+<p>Example: “Better economic performance causes greater support for incumbents.”</p>
+</blockquote>
+</div>
+<aside class="notes">
+<p>What is our independent variable?</p>
+<p>What is our dependent variable?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="what-makes-a-good-theory" class="title-slide slide level1 center">
+<h1>What makes a good theory?</h1>
+
+</section>
+<section id="focus-on-causality" class="slide level2">
+<h2>Focus on causality</h2>
+<ul>
+<li class="fragment">Correlation is not causation! (Neither is covariation.)</li>
+<li class="fragment">What does this actually mean though?</li>
+</ul>
+<p>[ICE CREAM SALES AND CRIME]</p>
+</section>
+<section id="dont-let-data-alone-drive-your-theories" class="slide level2">
+<h2>Don’t let data alone drive your theories</h2>
+<ul>
+<li class="fragment">Still on ice cream sales and homicide…</li>
+<li class="fragment">High blood sugar causes murder???</li>
+<li class="fragment">…probably not.</li>
+<li class="fragment">Focusing on observable patterns over plausible mechanisms leads to silly theories.</li>
 </ul>
 </section>
-<section id="fitting-these-terms-together" class="slide level2">
-<h2>Fitting these terms together</h2>
+<section id="consider-only-empirical-evidence" class="slide level2">
+<h2>Consider only empirical evidence</h2>
+<p>Two potential pitfalls here:</p>
+<ol type="1">
+<li class="fragment">Over-reliance on logic versus empirical investigation
+<ul>
+<li class="fragment">Sometimes, people just don’t make sense.</li>
+</ul></li>
+<li class="fragment">Over-emphasis on normative versus positive statements
+<ul>
+<li class="fragment">Arguing about what <em>ought</em> to be is not our job.</li>
+</ul></li>
+</ol>
+</section>
+<section id="an-aside-on-values" class="slide level2">
+<h2>An aside on values</h2>
+<p>[FREEDOM MAKES AFRICAN AMERICANS INSANE?]</p>
+<aside class="notes">
+<p>Scientists live their values by investigating questions whose answers can be used to help people.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="pursue-both-generality-and-parsimony" class="slide level2">
+<h2>Pursue both generality and parsimony</h2>
+<ul>
+<li class="fragment"><strong>Generality:</strong> theories should explain as broad a class of phenomena as possible</li>
+<li class="fragment"><strong>Parsimony:</strong> theories should be as simple as possible
+<ul>
+<li class="fragment"><strong>Occam’s Razor:</strong> [OCCAM’S RAZOR]</li>
+</ul></li>
+</ul>
+</section>
+<section id="from-theory-to-hypothesis" class="slide level2">
+<h2>From theory to hypothesis</h2>
 
 <img data-src="kellstedt_whitten_1.2.png" class="r-stretch quarto-figure-center"><p class="caption">Kellstedt and Whitten</p></section>
+<section id="back-to-economic-performance" class="slide level2">
+<h2>Back to economic performance</h2>
+<blockquote>
+<p>“Better economic performance causes greater support for incumbents.”</p>
+</blockquote>
+<ul>
+<li class="fragment">How might we <strong>operationalize</strong> each of these concepts?</li>
+</ul>
+</section>
+<section id="option-1" class="slide level2">
+<h2>Option 1</h2>
+
+<img data-src="week4lecture1_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"><aside class="notes">
+<p>What do we expect this relationship to look like?</p>
+<p>What do you like about this operationalization of economic performance? What is missing?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="option-2" class="slide level2">
+<h2>Option 2</h2>
+
+<img data-src="week4lecture1_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"><aside class="notes">
+<p>What do you think this relationship will look like?</p>
+<p>What do you like about this operationalization of economic performance? What is missing?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="revisiting-a-theory-from-last-week" class="slide level2">
 <h2>Revisiting a theory from last week</h2>
 <div class="fragment">
@@ -185,13 +334,13 @@
 </blockquote>
 </div>
 <ul>
-<li class="fragment">What hypotheses can we derive from this theory?</li>
-<li class="fragment">What are our independent and dependent variables, conceptually?</li>
+<li class="fragment">What are our independent and dependent variables, <strong>conceptually?</strong></li>
 <li class="fragment">How could we measure these concepts?
 <ul>
 <li class="fragment">In a perfect world?</li>
 <li class="fragment">With limited access, funding, and time?</li>
 </ul></li>
+<li class="fragment">What testable hypotheses can we derive from this theory?</li>
 </ul>
 </section>
 <section id="revisiting-our-polity-dataset" class="slide level2">
@@ -207,7 +356,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaGFwcGluZXNzX2RhdGEgPC0g
 </div>
 </div>
 <ul>
-<li class="fragment">How could we operationalize the concepts of economic development and democracy?</li>
+<li class="fragment">What variables might we choose to stand in for economic development and democracy?</li>
 <li class="fragment">What are the advantages of these operationalizations?</li>
 <li class="fragment">What are their weaknesses?</li>
 </ul>

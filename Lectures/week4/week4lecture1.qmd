@@ -55,30 +55,137 @@ engine: knitr
 
 :::
 
-## From concepts to measures
+:::{.notes}
+Define incumbent!!!
+
+What is our independent variable?
+
+What is our dependent variable?
+:::
+
+# What makes a good theory?
+
+## Focus on causality
+
+- Correlation is not causation! (Neither is covariation.)
+- What does this actually mean though?
+
+[ICE CREAM SALES AND CRIME]
+
+## Don't let data alone drive your theories
+
+- Still on ice cream sales and homicide...
+- High blood sugar causes murder???
+- ...probably not.
+- Focusing on observable patterns over plausible mechanisms leads to silly theories.
+
+## Consider only empirical evidence
+
+Two potential pitfalls here:
+
+1. Over-reliance on logic versus empirical investigation
+    - Sometimes, people just don't make sense.
+2. Over-emphasis on normative versus positive statements
+    - Arguing about what *ought* to be is not our job.
+
+## An aside on values
+
+[FREEDOM MAKES AFRICAN AMERICANS INSANE?]
+
+:::{.notes}
+Scientists live their values by investigating questions whose answers can be used to help people.
+:::
+
+## Pursue both generality and parsimony
+
+- **Generality:** theories should explain as broad a class of phenomena as possible
+- **Parsimony:** theories should be as simple as possible
+  - **Occam's Razor:** [OCCAM'S RAZOR]
+  
+## Let's evaluate our theory
 
 > "Better economic performance causes greater support for incumbents."
 
-- What is our independent variable?
-- What is our dependent variable?
-- How could we **operationalize** each of these concepts?
+- Is it causal?
+- Is there a plausible mechanism?
+- Is it empirically testable?
+- Is it unduly normative?
+- Is it general?
+- Is it parsimonious?
 
 ## From theory to hypothesis
 
 ![Kellstedt and Whitten](kellstedt_whitten_1.2.png)
 
+## From theory to hypothesis
+
+> "Better economic performance causes greater support for incumbents."
+
+:::{.fragment}
+How might we **operationalize** each of these concepts?
+:::
+
 ## Option 1
 
 ```{r}
+pacman::p_load(dplyr,
+               ggplot2)
 
+unemployment <- seq(0, 100, 10)
+growth <- seq(-20, 20, 10)
+voteshare <- seq(0, 100, 10)
+
+as.data.frame(cbind(growth, voteshare)) %>%
+  ggplot(aes(x = growth, y = voteshare)) +
+  xlab("One-year real economic growth per capita\n(percentage points)") +
+  ylab("Incumbent party % of\nmajor party vote share") +
+  theme(text = element_text(size = 20))
 ```
+
+:::{.notes}
+NOTE: independent variable goes on the x-axis, dependent variable goes on the y-axis
+
+What do we expect this relationship to look like?
+
+What do you like about this operationalization of economic performance? What is missing?
+:::
 
 ## Option 2
 
 ```{r}
-
+as.data.frame(cbind(unemployment, voteshare)) %>%
+  ggplot(aes(x = unemployment, y = voteshare)) +
+  xlab("Unemployment percentage") +
+  ylab("Incumbent party % of\nmajor party vote share") +
+  theme(text = element_text(size = 20))
 ```
 
+:::{.notes}
+What do you think this relationship will look like?
+
+What do you like about this operationalization of economic performance? What is missing?
+:::
+
+## Summing up
+
+- Scientific research starts with a **theory**
+- Really good theories are hard to come by
+- Theories cannot be tested; only **hypotheses** can
+- Doing so requires **operationalization** of key concepts into usable measures
+
+<!--
+
+Jupyter notebook will use Polity dataset to have students evaluate and test the theory "as countries develop economically, citizens start demanding more democracy."
+
+- what are the independent and dependent variables in this theory?
+- is the source of variation in this theory spatial or temporal or both? What kind of variation is available in the dataset?
+- what options do you have for operationalizing each of these concepts? what are the benefits and drawbacks of each?
+- what hypotheses can you test using this dataset?
+- make a two-way table or a scatterplot to test a hypothesis.
+
+ALTERNATIVE IDEA: find the problems with a set of theories and make suggestions for how to improve them.
+
+IDEA FOR THURSDAY: dissect a political science abstract to figure out the research question, theory, and hypothesis(/es). Ask Nathan?
 
 
 ## Revisiting a theory from last week
@@ -88,11 +195,11 @@ engine: knitr
 
 :::
 
-- What hypotheses can we derive from this theory?
-- What are our independent and dependent variables, conceptually?
+- What are our independent and dependent variables, **conceptually?**
 - How could we measure these concepts?
   - In a perfect world?
   - With limited access, funding, and time?
+- What testable hypotheses can we derive from this theory?
 
 ## Revisiting our Polity dataset
 
@@ -101,6 +208,7 @@ happiness_data <- read.csv('happiness_polity_2018.csv')
 head(happiness_data)
 ```
 
-- How could we operationalize the concepts of economic development and democracy?
+- What variables might we choose to stand in for economic development and democracy?
 - What are the advantages of these operationalizations?
 - What are their weaknesses?
+-->

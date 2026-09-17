@@ -1,5 +1,5 @@
 ---
-title: "Visualizing bivariate distributions in R"
+title: "Bivariate plots in R"
 subtitle: "Week 3 Lecture 2"
 format: 
   live-revealjs:
@@ -9,9 +9,26 @@ format:
 engine: knitr
 resources:
   - happiness_polity_2018.csv
+  - broockman_skovron.csv
 ---
 
 {{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+## Your first problem set
+
+- Available at the end of this class
+- Due at 11:59 pm next Friday, September 25
+- Complete and turn in just like in-class activities
+- Attempt everything on your own first, then discuss with your classmates if you get stuck
+- Office hours = private tutoring (just sayin')
+
+# Visualizing the relationship between two variables
+
+## A bit of terminology:
+
+- **bivariate:** involving two different variables
+- **x-axis:** the horizontal axis in a two-dimensional plot
+- **y-axis:** the vertical axis in a two-dimensional plot
 
 ## Take two datasets
 
@@ -32,13 +49,6 @@ rownames(a_dataset) <- NULL
 another_dataset <- datasaurus_dozen[datasaurus_dozen$dataset=="dino",2:3]
 rownames(another_dataset) <- NULL
 
-simpson_dataset <- subset(simpsons_paradox, dataset=="simpson_2")[2:3]
-simpson_dataset$age = with(simpson_dataset, 
-                              findInterval(x + y, c(0, 55, 80, 
-    120, 145, 200)))
-simpson_dataset$age = factor(simpson_dataset$age + 10)
-rownames(simpson_dataset) <- NULL
-colnames(simpson_dataset) <- c("hours.tv", "test.score", "age")
 ```
 :::{.columns}
 :::{.column width=50%}
@@ -59,29 +69,21 @@ head(another_dataset)
 # means of x and y in a_dataset and another_dataset
 ```
 
-:::{.fragment}
-Interesting...
-:::
 
 ## Visualizing variables
 
-- We will use the `ggplot2` package in R for building plots
-- To build a **scatterplot,** we use a two-part command:
-
-:::{fragment}
+Template for using the `ggplot2` package in R for building plots:
 
 ```r
-# the first part sets up the graph
+# the first line sets up the graph
 ggplot(dataset.name, aes(x = x.variable, y = y.variable)) + 
-# the second part plots the points
+# the second line plots the points
   geom_point()
   
 # (note that components of ggplots are separated with a +)
 ```
 
-:::
-
-- This plot will give us the **bivariate distribution** of these variables.
+This plot will give us a **bivariate plot** of `x.variable` and `y.variable` in `dataset.name.`
 
 ## Plotting `x` and `y` from `a_dataset`
 
@@ -93,12 +95,12 @@ library(ggplot2) # tells R to use the ggplot2 package
 ```
 
 ```{webr}
-# let's edit this code:
+# let's edit this code to replace the placeholders with our real dataset and variables:
 ggplot(dataset.name, aes(x = x.variable, y = y.variable)) + 
   geom_point()
 ```
 
-## Now let's do `another_dataset`
+## Now let's plot x and y from `another_dataset`
 
 ```{webr}
 
@@ -132,7 +134,9 @@ table(happiness_data$polity2_cat, happiness_data$gdpcapita_cat)
 
 ## Plotting lines of best fit
 
-```{webr, message = F}
+```{webr}
+#| warning: false
+#| message: false
 ggplot(happiness_data, aes(x = polity2, y = gdpcapita)) +
   geom_point() +
   geom_smooth(method = "lm", level = F)
@@ -140,49 +144,73 @@ ggplot(happiness_data, aes(x = polity2, y = gdpcapita)) +
 
 ## Not always a good idea!!
 
-```{webr, message = F}
+```{webr}
+#| warning: false
+#| message: false
 ggplot(another_dataset, aes(x = x, y = y)) +
   geom_point() +
   geom_smooth(method = "lm", level = F)
 ```
 
-## Another example
+## Today's question
 
-```{webr}
-head(simpson_dataset)
+- How do legislators' *perceptions* of their constituents' opinions compare to their constituents' *actual* opinions?
+- Broockman and Skovron (2018) surveyed 3,765 US state legislators and their constituents on three issues:
+  - Support for same-sex marriage
+  - Allowing employers to refuse to cover birth control for their employees for religious reasons
+  - Banning assault weapons
+
+## Today's codebook
+
+```{r}
+
+library(knitr)
+library(kableExtra)
+
+vars <- data.frame(
+  Variable = c(
+    "republican", "incumbent",
+    "marriage_perception", "marriage_opinion",
+    "religexempt_perception", "religexempt_opinion",
+    "gunsbanassault_perception", "gunsbanassault_opinion"
+  ),
+  Description = c(
+    "Party of the survey respondent (1 = Republican, 0 = Democrat)",
+    "Office status of the respondent (1 = incumbent, 0 = candidate)",
+    "Respondent's estimate of the percent of constituents who support same-sex marriage",
+    "Actual percent of constituents who support same-sex marriage",
+    "Respondent's estimate of the percent of constituents who support a religious exemption from covering birth control",
+    "Actual percent of constituents who support a religious exemption from covering birth control",
+    "Respondent's estimate of the percent of constituents who support a ban on assault weapons",
+    "Actual percent of constituents who support a ban on assault weapons"
+  )
+)
+
+kable(vars, format = "html", col.names = c("Variable", "Description")) %>%
+  kable_styling(font_size = 18, full_width = FALSE) %>%
+  column_spec(1, monospace = TRUE, width = "3.5cm") %>%
+  column_spec(2, width = "9cm")
+
 ```
 
-## Time to visualize!
+## Today's dataset
 
 ```{webr}
-#| message: false
-#| warning: false
-ggplot(simpson_dataset, aes(x = hours.tv, y = test.score)) +
-  geom_point() + geom_smooth(method = "lm", level = F)
+data <- read.csv('broockman_skovron.csv')
+head(data, n = 3)
 ```
 
-## There's more to the story...
+## How accurate are legislators' perceptions?
 
 ```{webr}
-#| message: false
-#| warning: false
-ggplot(simpson_dataset, # you can put line breaks after any comma
-       aes(x = hours.tv, y = test.score, color = age)) +
-  geom_point() # + geom_smooth(method = "lm", level = F)
+# let's look at marriage_opinion and marriage_perception in a ggplot
 ```
 
-## This is **Simpson's Paradox**
+- Let's add a line of best fit
 
-Overall patterns may disappear or even reverse when relevant subgroups are analyzed separately!
-
-So what should we do?
-
-- Always visualize your data
-- Always be thinking about theoretically relevant subgroups
 
 ## What we have covered
 
-- Using `ggplot` to plot **bivariate distributions**
+- Using `ggplot` to visualize the relationship between two variables
 - The importance of looking at your data, not just summarizing it
 - Plotting **lines of best fit** and thinking critically about their usefulness
-- **Simpson's Paradox** is a cautionary tale

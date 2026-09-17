@@ -4,9 +4,8 @@ test = list(
     ottr::TestCase$new(
       hidden = FALSE,
       name = NA,
-      points = 0.5,
+      points = 1.0,
       code = {
-<<<<<<< Updated upstream
         sol_plot <- ggplot(subset(data, republican == 0), aes(x = marriage_opinion, y = marriage_perception)) + geom_point()
         correct_dataset <- identical(dem.graph$data, subset(data, republican == 0))
         correct_xvar <- rlang::as_name(sol_plot$mapping$x) == 'marriage_opinion'
@@ -17,26 +16,6 @@ test = list(
                                             info = "Make sure that you are using the correct x variable.")
         testthat::expect_true(correct_yvar,
                                             info = "Make sure that you are using the correct y variable.")
-=======
-        question.correct <- identical( democrats.only , subset(data, republican == 0) ) 
-        testthat::expect_true(question.correct,
-                                    info = "democrats.only does not look right.")
-      }
-    ),
-    ottr::TestCase$new(
-      hidden = FALSE,
-      name = NA,
-      points = 0.5,
-      code = {
-        question.correct <- FALSE
-        g.correctq1 <- qplot(marriage_opinion, marriage_perception, data = democrats.only)
-        try(question.correct <- all.equal(g.correctq1$data, dem.graph$data) & 
-                            all.equal(g.correctq1$mapping[['x']], dem.graph$mapping[['x']]) == TRUE & 
-                            all.equal(g.correctq1$mapping[['y']], dem.graph$mapping[['y']]) == TRUE,
-           silent = TRUE)
-        testthat::expect_true(question.correct,
-                                    info = "dem.graph does not look right.")
->>>>>>> Stashed changes
       }
     )
   )

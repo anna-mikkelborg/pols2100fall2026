@@ -13,6 +13,10 @@ engine: knitr
 
 ## So far, we've mostly covered hammers
 
+```{r setup}
+
+```
+
 ![](maslows_hammer.png){fig-align="center"}
 
 # This week is about nails
@@ -70,12 +74,22 @@ What is our dependent variable?
 - Correlation is not causation! (Neither is covariation.)
 - What does this actually mean though?
 
-[ICE CREAM SALES AND CRIME]
+:::{.fragment}
+```{r}
+library(ggplot2)
+library(dplyr)
+data <- read.csv("icecream_murder_rate_data.csv")
+ggplot(data, aes(x = ice_cream_sales, y = murder_rate)) +
+  geom_point() +
+  geom_smooth(method = "lm", level = F) +
+  theme(text = element_text(size = 20))
+```
+:::
 
 ## Don't let data alone drive your theories
 
 - Still on ice cream sales and homicide...
-- High blood sugar causes murder???
+- Brain freezes cause murder??
 - ...probably not.
 - Focusing on observable patterns over plausible mechanisms leads to silly theories.
 
@@ -84,23 +98,15 @@ What is our dependent variable?
 Two potential pitfalls here:
 
 1. Over-reliance on logic versus empirical investigation
-    - Sometimes, people just don't make sense.
+    - Humans don't always do what they logically *should* do.
 2. Over-emphasis on normative versus positive statements
-    - Arguing about what *ought* to be is not our job.
-
-## An aside on values
-
-[FREEDOM MAKES AFRICAN AMERICANS INSANE?]
-
-:::{.notes}
-Scientists live their values by investigating questions whose answers can be used to help people.
-:::
+    - Arguing about what *ought* to be if the world were just and fair is not our job.
 
 ## Pursue both generality and parsimony
 
 - **Generality:** theories should explain as broad a class of phenomena as possible
 - **Parsimony:** theories should be as simple as possible
-  - **Occam's Razor:** [OCCAM'S RAZOR]
+  - **Occam's Razor:** if two hypotheses explain the same phenomenon equally well, the one that requires fewer assumptions is more likely to be correct.
   
 ## Let's evaluate our theory
 
@@ -121,9 +127,9 @@ Scientists live their values by investigating questions whose answers can be use
 
 > "Better economic performance causes greater support for incumbents."
 
-:::{.fragment}
-How might we **operationalize** each of these concepts?
-:::
+- To generate a hypothesis, ask:
+  - How might we **operationalize** each of these concepts?
+  - What is the expected direction of the relationship between our IV and DV *as we have operationalized them?*
 
 ## Option 1
 

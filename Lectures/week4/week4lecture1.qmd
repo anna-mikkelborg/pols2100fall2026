@@ -55,7 +55,7 @@ engine: knitr
 - Consists of an **independent variable,** a **dependent variable,** and the nature of the relationship between them
 
 :::{.fragment}
-> Example: "Better economic performance causes greater support for incumbents."
+> Example: "Better economic performance causes greater support for incumbent politicians and parties."
 
 :::
 
@@ -110,7 +110,7 @@ Two potential pitfalls here:
   
 ## Let's evaluate our theory
 
-> "Better economic performance causes greater support for incumbents."
+> "Better economic performance causes greater support for incumbent politicians and parties."
 
 - Is it causal?
 - Is there a plausible mechanism?
@@ -125,7 +125,7 @@ Two potential pitfalls here:
 
 ## From theory to hypothesis
 
-> "Better economic performance causes greater support for incumbents."
+> "Better economic performance causes greater support for incumbent politicians and parties."
 
 - To generate a hypothesis, ask:
   - How might we **operationalize** each of these concepts?
@@ -171,6 +171,15 @@ What do you think this relationship will look like?
 
 What do you like about this operationalization of economic performance? What is missing?
 :::
+
+## Today's activity
+
+- Less coding, more ✨concepts✨
+- Based on "Political Institutions and Voter Turnout in the Industrial Democracies" (Jackman 1987)
+- A few key terms:
+  - Voter turnout
+  - Malapportionment
+  - Mandatory voting laws
 
 ## Summing up
 

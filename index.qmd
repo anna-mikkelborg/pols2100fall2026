@@ -17,3 +17,6 @@ format: html
 # Week 3
 - [Week 3, Lecture 1: One-way and two-way tables in R](Lectures/week3/week3lecture1.html){target="_blank"}
 - [Week 3, Lecture 2: Visualizing bivariate relationships in R](Lectures/week3/week3lecture2.html){target="_blank"}
+
+# Week 4
+- [Week 4, Lecture 1: Variables, theories, and hypotheses part I](Lectures/week4/week4lecture1.html){target="_blank"}

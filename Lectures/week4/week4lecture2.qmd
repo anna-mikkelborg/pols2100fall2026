@@ -1,0 +1,107 @@
+---
+title: "Variables, theories, and hypotheses: A conceptual deep dive"
+subtitle: "Week 4 Lecture 2"
+format: 
+  live-revealjs:
+    slide-number: true
+    show-slide-number: all
+    incremental: true
+engine: knitr
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+## Reminder: Problem Set 1 due tomorrow!
+
+You will get an error when you generate your .zip file and Gradescope will say Autograder couldn't run --- don't worry about it this time!
+
+## Recap
+
+- Scientific research starts with a **theory**
+- Really good theories are hard to come by
+- Theories cannot be tested; only **hypotheses** can
+- Doing so requires **operationalization** of key concepts into usable measures
+
+--- 
+
+![Kellstedt and Whitten](kellstedt_whitten_1.2.png)
+
+# Common pitfalls in the research process
+
+## An overly-broad research question
+
+- Don't set yourself up for failure
+- Good rule of thumb is to focus on **effects of causes** rather than **causes of effects**
+  - Let your **independent variable** lead the way
+  
+:::{.fragment}
+> "Does experiencing famine (IV) increase or decrease the probability of a country going to war (DV)?"
+
+:::
+
+:::{.fragment}
+> "Why do countries go to war (DV)?"
+
+:::
+
+
+## Questionable operationalization
+
+- Making sure the measurement fits the concept can be tricky
+- Need to be able to make a strong case that your hypothesis tests actually tell us something about your theory
+- *e.g.,* a 1956-2026 price increase doesn't mean much until you adjust for inflation
+- *e.g.,* incumbent party vote share (have to account for presence/absence of third parties)
+
+## Ignoring alternative explanations
+
+- **Observational equivalence:** multiple theories that produce the same observable outcomes
+- *e.g.,* issue voting
+  - It's not that voters change their voting behavior to match their issue preferences...
+  - ...it's often that they change their issue preferences to match those of the politician they're voting for!
+- When possible, design hypothesis tests that can distinguish between all plausible explanations
+
+## Over-claiming
+
+- Firmly establishing a causal relationship is extremely hard
+- Sometimes the best we can do is gather a ton of suggestive evidence
+- Be transparent about the limitations of your tests!
+- Science is **iterative**
+
+## p-hacking
+
+- Tweaking data or statistical tests to get a preferred result
+  - *e.g.,* finding post-hoc justifications for focusing on a subset of the data
+  - *e.g.,* trying different model specifications to see which one shows the strongest relationship
+- More subtle than it sounds!
+- **Pre-registration** helps
+
+## Ethical issues
+
+- We are often gathering data on individual human beings
+- Don't do unethical things to them!
+  - Don't coerce or pressure people to participate
+  - Don't invade participants' privacy
+  - Don't put participants in danger
+  - Don't make them uncomfortable for no reason
+  
+## Ethical issues, continued
+
+- Protect participants' identities
+  - Data should be anonymized as quickly as possible
+  - Identifying information should be stored securely
+- Institutional Review Boards exist for this reason
+
+## Your research proposal
+
+- Due next Friday
+- 3% of your final grade
+- Solo assignment
+- Short --- a page of bullet points is fine
+
+# [Overview of the assignment](https://docs.google.com/document/d/1Z8P7PRylnem_80WCK1jyrQAhdzVqMWVq9F9EQz_xbDE/edit?tab=t.0)
+
+## Today's notebook
+
+- Back to Jackman (1987)
+- Working with your group test the second hypothesis in the abstract
+- If you finish early, work on your problem set or start brainstorming for your research proposal!

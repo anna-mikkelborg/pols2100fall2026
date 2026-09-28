@@ -1,0 +1,130 @@
+---
+title: "Correlation is not Causation"
+subtitle: "Week 5 Lecture 2"
+format: 
+  live-revealjs:
+    slide-number: true
+    show-slide-number: all
+    incremental: true
+engine: knitr
+resources:
+  - happiness_polity_2018.csv
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+## Tricky parts of the scientific method
+
+- Coming up with a good theory in the first place
+- Coming up with appropriate hypotheses to evaluate these theories
+- Coming up with empirical tests that effectively test whether the hypothesis holds or not
+
+:::{.fragment}
+This last step is much trickier than it looks! Beware **observational equivalence:** *when evidence that could be consistent with a hypothesis could also be interpreted as inconsistent due to alternative explanations.*
+:::
+
+## A theory of happiness and longevity
+
+- **Theory:** happiness causes a longer life.
+- **Hypothesis:** happier countries have people who live longer.
+- **Test:** analysis of `happiness_data`
+
+## Back to our happiness dataset
+
+```{webr}
+happiness_data <- read.csv("happiness_polity_2018.csv")
+head(happiness_data)
+```
+
+## Codebook
+
+```{r}
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+happiness_data <- read.csv("happiness_polity_2018.csv")
+
+vars <- data.frame(
+  Variable = c(
+    "polity2", "polity2_cat", "gdpcapita", "gdpcapita_cat",
+    "happiness", "happiness_cat", "life_expectancy", "life_expectancy_cat"
+  ),
+  Description = c(
+    "Polity Score: 21-point scale from -10 (hereditary monarchy) to +10 (consolidated democracy)",
+    "Political category: autocracies, anocracies (semi-democracies), or democracies",
+    "GDP per capita (economic output per person)",
+    "Income category based on GDP per capita",
+    "Happiness index from surveys on quality-of-life factors",
+    "Happiness category based on the happiness index",
+    "Average life expectancy, in years",
+    "Life expectancy category based on the life expectancy value"
+  )
+)
+
+kable(vars, format = "html", col.names = c("Variable", "Description")) %>%
+  kable_styling(font_size = 18, full_width = FALSE) %>%
+  column_spec(1, monospace = TRUE, width = "3cm") %>%
+  column_spec(2, width = "9cm")
+```
+
+## Do happier countries have people who live longer?
+
+```{webr}
+# let's make a ggplot using happiness and life_expectancy from happiness_data.
+```
+
+## So does being happy *cause* people to live longer?
+
+- We would have to assume happiness $\rightarrow$ longevity
+- But what if it's actually longevity $\rightarrow$ happiness?
+  - **Reverse causation:** the possibility that instead of A causing B, B causes A
+  
+:::{.fragment}
+**Correlation is not causation!**
+:::
+  
+## Another possibility
+  
+```{r}
+library(dplyr)
+library(tidyr)
+happiness_data %>%
+  pivot_longer(c(happiness, life_expectancy), names_to = "dv", values_to = "value") %>%
+  ggplot(aes(x = polity2, y = value)) +
+  geom_point() +
+  geom_smooth(method = "lm", level = F) +
+  facet_wrap(~dv, scales = "free_y", strip.position = "left") +
+  theme(strip.placement = "outside",
+        strip.background = element_blank(),
+        strip.text = element_text(size = 12)) +
+  ylab("")
+```
+
+## Omitted variable bias
+
+- Instead of A $\rightarrow$ B, C $\rightarrow$ A and B
+- Even though A doesn't cause B, A will be related to B
+- What other omitted variables can we imagine in this case?
+
+:::{.fragment}
+**Correlation is not causation!**
+:::
+
+---
+
+*One of the most important skills you will learn in this class is how to tell stories about why a correlation isn't necessarily causal.*
+
+## So can we test our original hypothesis with these data?
+
+```{r}
+ggplot(happiness_data, aes(x = happiness, y = life_expectancy)) +
+  geom_point() +
+  geom_smooth(method = "lm", level = F)
+```
+
+## Summing up
+
+- **Original theory:** A $\rightarrow$ B
+- **Reverse causation:** B $\rightarrow$ A
+- **Omitted variable bias:** C $\rightarrow$ both A and B
+

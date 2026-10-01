@@ -32,6 +32,12 @@ This last step is much trickier than it looks! Beware **observational equivalenc
 ## Back to our happiness dataset
 
 ```{webr}
+#| edit: false
+#| autorun: false
+#| echo: true
+#| message: false
+#| warning: false
+library(ggplot2)
 happiness_data <- read.csv("happiness_polity_2018.csv")
 head(happiness_data)
 ```

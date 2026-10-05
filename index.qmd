@@ -21,8 +21,8 @@ format: html
 
 # Week 4
 
-- [Week 4, Lecture 1: Variables, theories, and hypotheses part I](Lectures/week4/week4lecture1.html){target="_blank"}
-- [Week 4, Lecture 2: Variables, theories, and hypotheses part II](Lectures/week4/week4lecture2.html){target="_blank"}
+- [Week 4, Lecture 1: Variables, theories, & hypotheses part I](Lectures/week4/week4lecture1.html){target="_blank"}
+- [Week 4, Lecture 2: Variables, theories, & hypotheses part II](Lectures/week4/week4lecture2.html){target="_blank"}
 
 # Week 5
 

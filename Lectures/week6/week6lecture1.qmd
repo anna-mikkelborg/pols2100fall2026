@@ -1,0 +1,259 @@
+---
+title: "Omitted variable bias, selection bias, and potential outcomes"
+subtitle: "Week 6 Lecture 1"
+format: 
+  live-revealjs:
+    slide-number: true
+    show-slide-number: all
+    incremental: true
+engine: knitr
+resources:
+  - wellness_with_POs.csv
+  - happiness_data.csv
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+## Recap
+
+- Political science theories are usually **causal**
+- But establishing causality is extremely difficult
+  - **Reverse causation**
+  - **Omitted variable bias**
+- Today: the problems mount, but we start to consider solutions, too
+
+## How can we know whether being happy *causes* people to live longer?
+
+```{r}
+library(ggplot2)
+happiness_data <- read.csv("happiness_polity_2018.csv")
+ggplot(happiness_data, aes(x = happiness, y = life_expectancy)) +
+  geom_point() +
+  geom_smooth(method = "lm", level = F)
+```
+
+## The potential outcomes framework
+
+- A system that can hep us understand what causality *is.*
+- *What would the value of the dependent variable be for the same unit at different values of the independent variable?*
+- *e.g.,* How long would Fred live if he was extremely happy versus only moderately happy?
+- **Counterfactual reasoning:** we consider all of Fred's *potential outcomes*
+ 
+## Potential outcomes = parallel universes{style="color:black;font-size:smaller"}
+
+![](parallel_universes.png){fig-align="center"}
+
+## Potential outcomes
+
+- **Hypothetical,** but **real** (???)
+- *What would have happened to a particular unit if it received a particular treatment*
+  - That is, if the independent variable took on a particular value for that unit
+- **Causality:** the difference between potential outcomes within a single unit.
+- *e.g.,* if Fred lives longer in the case in which he is happier, then we know that happiness *caused* Fred's longevity.
+
+## We can compare them like this
+
+```{r, echo = F}
+library(knitr)
+library(kableExtra)
+library(dplyr)
+fred <- rbind(c("Fred", "Lives to 100", "Lives to 85", "Lives to 75"))
+
+kable(fred,
+      col.names = c("Unit", "\"very happy\"", "\"pretty happy\"", "\"unhappy\"")) %>%
+  add_header_above(c(" " = 1, "Potential outcome if..." = 3))
+```
+
+- Effect of being "very happy" instead of "unhappy" = 25 years of extra life!
+- Effect of being "very happy" instead of "pretty happy" = 15 years
+
+# But of course, Fred has but one life to live...
+
+## So this is all we can actually observe
+
+```{r, echo = F}
+library(knitr)
+library(kableExtra)
+library(dplyr)
+fred <- rbind(c("Fred", "???", "Lives to 85", "???"))
+
+kable(fred,
+      col.names = c("Unit", "\"very happy\"", "\"pretty happy\"", "\"unhappy\"")) %>%
+  add_header_above(c(" " = 1, "Potential outcome if..." = 3))
+```
+
+- This is **the fundamental problem of causal inference!**
+- We can never observe more than one potential outcome per unit
+- Put differently: only one *potential* outcome can ever become a *real* outcome
+
+## So what can we do?
+
+- FPCI $\rightarrow$ we can never directly observe causal relationships at the **individual** level
+- BUT we can estimate *average* treatment effects across groups of people!
+-  New research question: does a candidate training program increase the likelihood that women will run for office?
+
+---
+
+::::: r-stack
+
+```{r}
+group<- c(rep("Attended training", 3), rep("Did not attend", 3), "")
+names <- c("Olivia", "Katie", "Ashlynd", "Camille", "Christina", "Ivy", "Fraction running")
+attended <- c("Ran for office", "Ran for office", "Ran for office", "???", "???", "???", "3/3")
+didnt <- c("???", "???", "???", "Ran for office", "Did not run", "Did not run", "1/3")
+kable(cbind(names, group, attended, didnt),
+      col.names = c("Person", "Treatment", "Attended", "Did not attend"),
+      align = "cccc") %>%
+  column_spec(1, width = "1.5cm") %>%
+  column_spec(2, width = "1.8cm") %>%
+  column_spec(3, color = c("white", "white", "white", "black", "black", "black", "#FFFFFF00"), background = c("green", "green", "green", "#FFFFFF00", "#FFFFFF00", "#FFFFFF00", "#FFFFFF00"), width = "6cm") %>%
+  column_spec(4, width = "6cm") %>%
+  row_spec(4:7, color = "white") %>%
+ collapse_rows(columns = 2, valign = "middle") %>%
+  add_header_above(c(" " = 2, "Potential outcomes" = 2)) %>%
+  kable_styling(font_size = 28)
+```
+
+:::{.fragment}
+```{r}
+group <- c(rep("Attended training", 3), rep("Did not attend", 3), "")
+names <- c("Olivia", "Katie", "Ashlynd", "Camille", "Christina", "Ivy", "Fraction running")
+attended <- c("Ran for office", "Ran for office", "Ran for office", "???", "???", "???", "3/3")
+didnt <- c("???", "???", "???", "Ran for office", "Did not run", "Did not run", "1/3")
+kable(cbind(names, group, attended, didnt),
+      col.names = c("Person", "Treatment", "Attended", "Did not attend"),
+      align = "cccc") %>%
+  column_spec(1, width = "1.5cm") %>%
+  column_spec(2, width = "1.8cm") %>%
+  column_spec(3, color = c("white", "white", "white", "black", "black", "black", "black"), background = c("green", "green", "green", "#FFFFFF00", "#FFFFFF00", "#FFFFFF00", "#FFFFFF00"), width = "6cm") %>%
+  column_spec(4, color = c("black", "black", "black", "white", "white", "white", "black"), background = c("#FFFFFF00", "#FFFFFF00", "#FFFFFF00", "green", "grey20", "grey20", "#FFFFFF00"), width = "6cm") %>%
+  row_spec(7, color = "white") %>%
+ collapse_rows(columns = 2, valign = "middle") %>%
+  add_header_above(c(" " = 2, "Potential outcomes" = 2)) %>%
+  kable_styling(font_size = 28)
+```
+
+:::
+
+:::{.fragment}
+```{r}
+group <- c(rep("Attended training", 3), rep("Did not attend", 3), "")
+names <- c("Olivia", "Katie", "Ashlynd", "Camille", "Christina", "Ivy", "Fraction running")
+attended <- c("Ran for office", "Ran for office", "Ran for office", "???", "???", "???", "3/3")
+didnt <- c("???", "???", "???", "Ran for office", "Did not run", "Did not run", "1/3")
+kable(cbind(names, group, attended, didnt),
+      col.names = c("Person", "Treatment", "Attended", "Did not attend"),
+      align = "cccc") %>%
+  column_spec(1, width = "1.5cm") %>%
+  column_spec(2, width = "1.8cm") %>%
+  column_spec(3, color = c("white", "white", "white", "black", "black", "black", "black"), background = c("green", "green", "green", "#FFFFFF00", "#FFFFFF00", "#FFFFFF00", "white"), width = "6cm") %>%
+  column_spec(4, color = c("black", "black", "black", "white", "white", "white", "black"), background = c("#FFFFFF00", "#FFFFFF00", "#FFFFFF00", "green", "grey20", "grey20", "white"), width = "6cm") %>%
+ collapse_rows(columns = 2, valign = "middle") %>%
+  add_header_above(c(" " = 2, "Potential outcomes" = 2)) %>%
+  kable_styling(font_size = 28)
+```
+
+:::
+:::::
+
+# So does attending the training *cause* women to run for office?
+
+## What if...
+
+```{r}
+group <- c(rep("Attended training", 3), rep("Did not attend", 3))
+names <- c("Olivia", "Katie", "Ashlynd", "Camille", "Christina", "Ivy")
+attended <- c("Ran for office", "Ran for office", "Ran for office", "Would run", "Would not run", "Would not run")
+didnt <- c("Would still run", "Would still run", "Would still run", "Ran for office", "Did not run", "Did not run")
+kable(cbind(names, group, attended, didnt),
+      col.names = c("Person", "Treatment", "Attended", "Did not attend"),
+      align = "cccc") %>%
+  column_spec(1, width = "1.5cm") %>%
+  column_spec(2, width = "1.8cm") %>%
+  column_spec(3, color = c("white", "white", "white", "white", "white", "white"), background = c("green", "green", "green", "#8ec080", "grey50", "grey50"), width = "6cm") %>%
+  column_spec(4, color = c("white", "white", "white", "white", "white", "white"), background = c("#8ec080", "#8ec080", "#8ec080", "green", "grey20", "grey20"), width = "6cm") %>%
+ collapse_rows(columns = 2, valign = "middle") %>%
+  add_header_above(c(" " = 2, "Potential outcomes" = 2)) %>%
+  kable_styling(font_size = 28)
+```
+
+## We have to ask: how was treatment assigned?
+
+- **Selection bias:** some systematic difference influences which units are "treated" and which are not
+  - *e.g.,* existing political ambition
+- In the language of potential outcomes, treated and untreated units would have different potential outcomes
+- A form of **omitted variable bias**
+
+# Introducing your notebook dataset
+
+## Do workplace wellness programs save companies money?
+
+- Many companies and organizations (including LMU!) have workplace wellness programs
+- Idea is that healthier employees cost employers less in expensive health insurance
+- *But do they work?*
+- We'll look at fake "potential outcomes" together; you'll analyze real data in your notebook
+
+## The data
+
+```{webr}
+wellness <- read.csv("wellness_with_POs.csv")
+wellness
+```
+
+## Codebook
+
+```{r}
+#| echo: false
+library(knitr)
+library(kableExtra)
+
+codebook <- data.frame(
+  Variable = c("name", "participate", "baseline", "po_control", "po_treat"),
+  Description = c(
+    "Respondent name",
+    "0 = did not participate in the wellness program; 1 = did participate",
+    "Average monthly medical costs at baseline (before the program started)",
+    "Monthly medical cost after the program started <strong>if the person did <em>not</em> participate</strong>",
+    "Monthly medical cost after the program started <strong>if the person <em>did</em> participate</strong>"
+  ),
+  stringsAsFactors = FALSE
+)
+
+kable(codebook, format = "html", escape = FALSE, align = "ll") |>
+  kable_styling(bootstrap_options = c("striped", "condensed"),
+                full_width = FALSE, position = "center", font_size = 24) |>
+  column_spec(1, monospace = TRUE, bold = TRUE) |>
+  column_spec(2, width = "32em")
+```
+
+:::{.notes}
+In this dataset, what is the treatment/independent variable?
+
+What is the outcome/dependent variable?
+
+:::
+
+## What is the treatment effect for Alan? For Will?
+
+```{r}
+wellness <- read.csv("wellness_with_POs.csv")
+head(wellness)
+```
+
+## Let's add a treatment effect column to the dataset
+
+```{webr}
+# add column treatment_effect to wellness by calculating po_treatment - po_control
+```
+
+## Let's estimate the average treatment effect
+
+```{webr}
+# take the mean of treatment_effect in wellness
+```
+
+## Takeaways
+
+- Sometimes, individual treatment effects are zero (or the opposite of what we expected!)
+- But we can never observe the true treatment effect for any specific individual in real life (FPCI)
+- In your groups, you'll analyze a real dataset where only one potential outcome per unit is realized...

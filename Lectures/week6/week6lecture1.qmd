@@ -243,13 +243,20 @@ head(wellness)
 ## Let's add a treatment effect column to the dataset
 
 ```{webr}
-# add column treatment_effect to wellness by calculating po_treatment - po_control
+# add column treatment_effect to wellness by 
+# calculating po_treat - po_control
 ```
 
-## Let's estimate the average treatment effect
+## Let's estimate the *real* average treatment effect
 
 ```{webr}
 # take the mean of treatment_effect in wellness
+```
+
+## Which outcomes do we *actually* observe?
+
+```{webr}
+wellness
 ```
 
 ## Takeaways

@@ -1,5 +1,5 @@
 ---
-title: "Omitted variable bias, selection bias, and potential outcomes"
+title: "Omitted variable bias, selection bias, & potential outcomes"
 subtitle: "Week 6 Lecture 1"
 format: 
   live-revealjs:

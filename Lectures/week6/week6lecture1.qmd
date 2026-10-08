@@ -14,6 +14,10 @@ resources:
 
 {{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
 
+# Problem Set 2 posted after class
+
+Due next Friday, 10/16
+
 ## Recap
 
 - Political science theories are usually **causal**

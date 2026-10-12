@@ -32,3 +32,8 @@ format: html
 # Week 6
 
 - [Week 6, Lecture 1: Omitted variable bias, selection bias, and potential outcomes](Lectures/week6/week6lecture1.html){target="_blank"}
+
+# Week 7
+
+- [Week 7, Lecture 1: Randomized experiments](Lectures/week7/week7lecture1.html){target="_blank"}
+- [Week 7, Lecture 2: More about experiments, `difference_in_means()`](Lectures/week7/week7lecture2.html){target="_blank"}

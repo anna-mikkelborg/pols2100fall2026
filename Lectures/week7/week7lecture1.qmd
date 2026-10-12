@@ -122,7 +122,6 @@ treated.mean - non.treated.mean
 
 - Is assignment to treatment truly random?
 - What variable(s) might create omitted variable bias in this scenario?
-- How could you change the raffle to fix this?
 
 ## What if the groups randomly turn out to have different potential outcomes?
 

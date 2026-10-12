@@ -171,6 +171,26 @@ kable(cbind(names, attended, didnt),
 
 ![](neighbors_for_slides.png)
 
+## An aside about potential outcomes
+
+```{r}
+names <- c("Chris", "James", "Gordon", "Mark")
+control <- c("Does not vote", "Does not vote", "Votes", "Votes")
+treatment <- c("Votes", "Does not vote", "Votes", "Does not vote")
+kable(cbind(names, control, treatment),
+      col.names = c("Person", "Control", "Neighbors treatment"),
+      align = "cccc") %>%
+  column_spec(1, width = "1.5cm") %>%
+  column_spec(2, color = c("white", "white", "white", "white"), background = c("grey20", "grey20", "green", "green"), width = "6cm") %>%
+  column_spec(3, color = c("white", "white", "white", "white"), background = c("green", "grey20", "green", "grey20"), width = "6cm") %>%
+  add_header_above(c(" " = 1, "Potential outcomes" = 2)) %>%
+  kable_styling(font_size = 28)
+```
+
+:::{.fragment}
+Always remember that individual treatment effects may vary!
+:::
+
 ## Let's look at the data
 
 ```{webr}
@@ -215,5 +235,14 @@ kable(codebook, format = "html", align = "ll") |>
 ## Let's check out the balance of some key variables
 
 ```{webr}
-table(social$treat_neighbors, social$sex)
+mean(subset(social, treat_neighbors == 1)$sex== "female") - 
+  mean(subset(social, treat_neighbors == 0)$sex == "female") # gender balance
+
+mean(subset(social, treat_neighbors == 1)$democrat) - 
+  mean(subset(social, treat_neighbors == 0)$democrat) # party balance
+
+mean(subset(social, treat_neighbors == 1)$p2004) - 
+  mean(subset(social, treat_neighbors == 0)$p2004) # voted in last election
 ```
+
+# Your turn

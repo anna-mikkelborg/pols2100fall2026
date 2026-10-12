@@ -103,8 +103,11 @@ Replace:
 ## Let's calculate the effect of the Hawthorne mailer
 
 ```{webr}
-library(estimatr) # package that includes the command
-hawth_effect <- difference_in_means(outcome_voted ~ treat, social, condition1 = 'control', condition2 = 'hawthorne')
+suppressPackageStartupMessages(library(estimatr)) # load package
+hawth_effect <- difference_in_means(outcome_voted ~ treat, 
+                                    social, 
+                                    condition1 = 'control', 
+                                    condition2 = 'hawthorne')
 hawth_effect
 ```
 
@@ -158,7 +161,10 @@ kable(design, format = "html", escape = FALSE,
 ## Let's compare the `hawthorne` and `civic` conditions instead
 
 ```{webr}
-# difference_in_means(outcome.name ~ treatment.name, dataset.name, condition1 = 'baseline.condition', condition2 = 'treatment.condition')
+# difference_in_means(outcome.name ~ treatment.name, 
+#                     dataset.name, 
+#                     condition1 = 'baseline.condition', 
+#                     condition2 = 'treatment.condition')
 hawth_vs_civic <- 
 hawth_vs_civic
 ```
@@ -166,8 +172,12 @@ hawth_vs_civic
 ## Now let's compare the `civic` and `control` conditions
 
 ```{webr}
-# difference_in_means(outcome.name ~ treatment.name, dataset.name, condition1 = 'baseline.condition', condition2 = 'treatment.condition')
+# difference_in_means(outcome.name ~ treatment.name, 
+#                     dataset.name, 
+#                     condition1 = 'baseline.condition', 
+#                     condition2 = 'treatment.condition')
 civic_effect <- 
+civic_effect
 civic_effect / hawth_effect
 ```
 

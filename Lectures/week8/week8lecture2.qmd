@@ -27,7 +27,6 @@ resources:
 - Scientists are often arguing that something is true
 - To do this, we have to persuade skeptics
 - Skeptics start out believing we are wrong. This is the **null hypothesis.**
-- Today, Sarah personifies the character of the skeptic
 :::
 :::
 
@@ -41,7 +40,7 @@ resources:
 ## Is the coin fair?
 
 - **Null hypothesis:** the coin is equally likely to come up heads or tails
-  - (what Sarah the skeptic things and you want to show is wrong)
+  - (what Sarah the skeptic thinks and you want to show is wrong)
 - **Alternative hypothesis:** the coin is more likely to come up heads than tails
   - (what you want to show is true)
 - How would you go about proving Sarah wrong?
@@ -91,11 +90,11 @@ sum(flip.some.coins(10, .5))
 
 ## She simulates 10,000 different tries of flipping a coin 10 times
 
-```{webr}
+```{webr, warning = F, message = F}
 # simulate 10,000 tries
 flip.results.num.heads <- replicate(10000, sum(flip.some.coins(10, .5)))
 # plot the results
-library(ggplot2)
+suppressMessages(library(ggplot2))
 qplot(flip.results.num.heads, bins = 11) +
   scale_x_continuous(breaks=seq(0,10,1)) + 
   xlab("Number of Heads")
@@ -109,7 +108,7 @@ mean(flip.results.num.heads >= 7)
 
 - About 17% of times you flip a fair coin 10 times, you'd expect to see 7 or more heads
 - So Sarah has a pretty good point!
-- This is a **$p$-value:** the probability that we would see an answer as or more extreme than the answer we saw *even if the null hypothesis was true.*
+- This is a **$p$-value:** the probability that we would see an answer as or more extreme than the answer we saw *if the null hypothesis was true.*
 
 ## What this means visually
 
@@ -129,7 +128,7 @@ We need two things to calculate a p-value:
 
 - $p$-values might seem like just a way for skeptics like Sarah to show that the evidence is ambiguous and there's a chance the null hypothesis is right
 - But in science, we often argue that the null hypothesis should be **rejected** --- that Sarah should accept that she is wrong
-- Say you saw 9 flips out of 10 come up heads
+- Say you saw 9 flips out of 10 come up heads:
 
 ```{webr}
 mean(flip.results.num.heads >= 9)
@@ -159,12 +158,12 @@ mean(flip.results.num.heads >= 9)
 ## Why not just calculate the probability we are right?
 
 - Remember, we just calculated *the probability we would see what we saw if Sarah were right.*
-- Why not just calculate *the probabilty we are right?*
+- Why not just calculate *the probability* **we** *are right?*
 - This turns out to be impossible!
 
 ---
 
-![](frequentists_vs_bayesians_2x.png)
+![](frequentists_vs_bayesians_2x.png){fig-align="center"}
 
 ## This sets up an awkward situation
 
@@ -184,7 +183,7 @@ mean(flip.results.num.heads >= 9)
 ## What $p$-values *actually* mean
 
 - A $p$-value is the probability of seeing an estimate as large or larger than the estimate we saw *if the null hypothesis were true.*
-- Another way of thinking about this: if we repeated a study many times, what percent of the time would we get an estimate as extreme as we did *if the null hypothesis were true.*
+- Another way of thinking about this: if we repeated a study many times, what percent of the time would we get an estimate as extreme as we did *if the null hypothesis were true?*
 - *e.g.,* 20 groups in a large class study whether eating jelly beans causes acne (it doesn't, thank goodness)
   - We should *expect* 1/20 groups to get a p-value less than 0.05 by chance!
   

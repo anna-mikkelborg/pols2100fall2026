@@ -68,16 +68,26 @@ difference_in_means(outcome ~ treat,
 
 ## How much noise does my experiment have?
 
+
+
 :::{.columns}
-:::{.column width=50%}
+:::{.column width=25%}
+
+
+:::
+:::{.column width=25%}
 ![](lowbias_highnoise.png)
 :::
-:::{.column width=50%}
+:::{.column width=25%}
 ![](lowbias_lownoise.png)
+:::
+:::{.column width=25%}
+
 :::
 :::
 
 **Standard error:** A measure of how far off from the truth an experiment's answer usually is.
+
 
 ## Today's example: what kind of lobbying is most effective?
 
@@ -128,7 +138,7 @@ kable(codebook, format = "html", escape = FALSE, align = "ll") |>
 ```{webr}
 data <- read.csv("lobbying.csv")
 head(data)
-table(table$treat)
+table(data$treat)
 ```
 
 ## Does social lobbying work?
@@ -178,9 +188,9 @@ compute.office.lobby.effect(re.randomize(data))
 ## Let's simulate a *lot* of these
 
 ```{webr}
-simulated.estimates <- replicate(10000, compute.office.lobby.effect(re.randomize(data)))
+simulated.estimates <- replicate(1000, compute.office.lobby.effect(re.randomize(data)))
 head(simulated.estimates)
-library(ggplot2)
+suppressMessages(library(ggplot2))
 qplot(simulated.estimates, binwidth = .025) + 
   geom_vline(xintercept = compute.office.lobby.effect(data), color = 'red')
 ```
@@ -204,7 +214,6 @@ compute.office.lobby.effect <- function(input.data) {
   return(as.numeric(estimate))
 }
 simulated.estimates <- replicate(10000, compute.office.lobby.effect(re.randomize(data)))
-head(simulated.estimates)
 library(ggplot2)
 qplot(simulated.estimates, binwidth = .025) + 
   geom_vline(xintercept = compute.office.lobby.effect(data), color = 'red')
@@ -239,7 +248,7 @@ A measure of how likely it is that an estimate of the size we saw would arise by
   - By how much would we have to increase $N$ to make the standard error half its original size?
 
   
-## Reviewing new terms and concepts
+## Reviewing new terms and concepts {.smaller}
 
 - **True average treatment effect:** the actual truth about what the causal effect of a treatment is, which would require us to see all the potential outcomes to calculate
 - **Estimate:** from a particular study run one particular time, our best guess of what the true average treatment effect is

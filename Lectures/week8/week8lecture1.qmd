@@ -249,6 +249,18 @@ A measure of how likely it is that an estimate of the size we saw would arise by
 - **t-statistic:** The estimate divided by the standard error. Indicates how likely a study's result is to have arisen by chance.
 
   
-# There is no analogous test for quantifying *bias.* Why not?
+## There is no analogous test for quantifying *bias.* Why not?
+
+:::{.columns}
+:::{.column width=33%}
+![](lowbias_highnoise.png)
+:::
+:::{.column width=33%}
+![](highbias_lownoise.png)
+:::
+:::{.column width=33%}
+![](lowbias_lownoise.png)
+:::
+:::
 
 # Notebook time

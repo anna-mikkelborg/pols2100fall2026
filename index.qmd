@@ -41,3 +41,4 @@ format: html
 # Week 8
 
 - [Week 8, Lecture 1: Quantifying Uncertainty](Lectures/week8/week8lecture1.html){target="_blank"}
+- [Week 8, Lecture 2: $p$-values and Statistical Significance](Lectures/week8/week8lecture2.html){target="_blank"}

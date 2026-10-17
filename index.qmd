@@ -37,3 +37,7 @@ format: html
 
 - [Week 7, Lecture 1: Randomized experiments](Lectures/week7/week7lecture1.html){target="_blank"}
 - [Week 7, Lecture 2: More about experiments, `difference_in_means()`](Lectures/week7/week7lecture2.html){target="_blank"}
+
+# Week 8
+
+- [Week 8, Lecture 1: Quantifying Uncertainty](Lectures/week8/week8lecture1.html){target="_blank"}

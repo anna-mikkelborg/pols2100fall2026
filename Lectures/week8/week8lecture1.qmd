@@ -241,8 +241,7 @@ A measure of how likely it is that an estimate of the size we saw would arise by
 ## One more important statistic
 
 - **Standard deviation:** the spread of the outcome variable within each treatment group
-- If treatment and control groups are the same size and have the same standard deviation, then:
-- $\text{Standard Error} = 2s\sqrt{\frac{1}{N}}$
+- If treatment and control groups are the same size and have the same standard deviation, then $\text{Standard Error} = 2s\sqrt{\frac{1}{N}}$
   - What happens to the standard error if the standard deviation ($s$) doubles?
   - What happens to the standard error if the sample size ($N$) doubles?
   - By how much would we have to increase $N$ to make the standard error half its original size?

@@ -53,18 +53,14 @@ resources:
 set.seed(92344)
 # this line of code simulates a certain number of coin flips
 # with a certain probability of being heads
-flip.some.coins <- function(n.flips, prob.heads) 
-  rbinom(n.flips, 1, prob.heads)
+flip.some.coins <- function(n.flips, prob.heads){rbinom(n.flips, 1, prob.heads)}
+
 # this line runs the function, simulating 10 flips of a fair coin
 flipped.coins <- flip.some.coins(10, 0.5)
-```
 
-## Let's take a look
-
-```{webr}
 # let's take a look
-flipped.coins
-sum(flipped.coins)
+# flipped.coins
+# sum(flipped.coins)
 ```
 
 ## How would Sarah respond?
@@ -91,6 +87,7 @@ sum(flip.some.coins(10, .5))
 ## She simulates 10,000 different tries of flipping a coin 10 times
 
 ```{webr, warning = F, message = F}
+options(warn = -1)
 # simulate 10,000 tries
 flip.results.num.heads <- replicate(10000, sum(flip.some.coins(10, .5)))
 # plot the results
@@ -183,24 +180,25 @@ mean(flip.results.num.heads >= 9)
 ## What $p$-values *actually* mean
 
 - A $p$-value is the probability of seeing an estimate as large or larger than the estimate we saw *if the null hypothesis were true.*
-- Another way of thinking about this: if we repeated a study many times, what percent of the time would we get an estimate as extreme as we did *if the null hypothesis were true?*
+- If you prefer: if we repeated a study many times, what percent of the time would we get an estimate as extreme as we did *if the null hypothesis were true?*
 - *e.g.,* 20 groups in a large class study whether eating jelly beans causes acne (it doesn't, thank goodness)
   - We should *expect* 1/20 groups to get a p-value less than 0.05 by chance!
   
-## Reviewing new concepts
+## Reviewing new concepts {.smaller}
 
 - **Null hypothesis:** the hypothesis you want to disprove. (In experiments, this is usually that the treatment has no effect.)
 - **Alternative hypothesis:** the hypothesis you want to demonstrate. (In experiments, this is usually that the treatment *does* have an effect.)
 - **$p$-value:** The probability we would see an estimate as large or larger than the one we did, *if* the null hypothesis were true.
   - *Helps answer a skeptic of a treatment* by telling them how likely it is that we would see the evidence we did if the null hypothesis were true.
+  - Corresponds to a **t-statistic** of 1.96
   
-## One last new concept
+## One last new concept {.smaller}
 
 - **Statistical significance:** a $p$-value less than 0.05. This is an arbitrary threshold used by social scientists.
   - A statistically significant $p$-value:
     - means that, by convention, we say the null hypothesis can be *rejected.*
     - does NOT mean the null hypothesis is definitely wrong.
-  - A statistically insignificant $p$-value:
+  - A non-statistically significant $p$-value:
     - means that, by convention, we cannot reject the null hypothesis.
     - does NOT mean that the null hypothesis is definitely true.
     

@@ -1,0 +1,235 @@
+---
+title: "$p$-values in experiments"
+subtitle: "Week 9 Lecture 1"
+format: 
+  live-revealjs:
+    slide-number: true
+    show-slide-number: all
+    incremental: true
+engine: knitr
+resources:
+  - lobbying.csv
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+---
+
+## Recap
+
+- Last Tuesday: experiments with random assignment can solve **bias** but not **noise**
+- Last Thursday: **$p$-values** tell us how likely our (noisy) estimates would be to occur *purely by chance*
+- Today: interpreting $p$-values derived from experimental data --- bringing it all together!
+
+## The goal of experiments
+
+- The **null hypothesis** is almost always that the treatment had no effect relative to the baseline (whether the control or another treatment).
+- We want to show that the null hypothesis is **wrong.**
+- When we analyze an experiment, we reach an **estimate** of what the true effect is.
+- We calculate the **standard error,** which gives us a measure of how likely we would see different estimates by chance if there were no effect.
+
+## How do we show that the null hypothesis is probably wrong?
+
+:::{.fragment}
+We compare the actual estimate from the experiment to what might have occurred by chance if the null hypothesis were true.
+:::
+
+## An example from the social lobbying experiment
+
+```{webr}
+library(estimatr)
+data <- read.csv("lobbying.csv")
+head(data)
+table(data$treat)
+```
+
+## Estimating the effect of social lobbying
+
+```{webr}
+difference_in_means(supportgroup ~ treat, 
+                    data, 
+                    condition1 = 'control',
+                    condition2 = 'sociallobby')
+```
+
+## What would skeptical Sarah say?
+
+:::{.columns}
+:::{.column width=50%}
+![](skeptical_sarah.jpg)
+:::
+:::{.column width=50%}
+:::{.fragment}
+In experiments, we can see positive estimates even if the true average treatment effect is zero! You might have just randomly put the legislators who supported the bill anyway into the social lobbying group!
+:::
+:::
+:::
+
+## Sarah is claiming the legislators' potential outcomes look something like this
+
+```{r}
+library(dplyr)
+library(knitr)
+library(kableExtra)
+names <- c("Rep 1", "Rep 2", "Rep 3", "Rep 4", "Rep 5", "Rep 6")
+nolobby <- c("Sponsors", "Sponsors", "Does not sponsor", "Sponsors", "Sponsors", "Does not sponsor")
+lobby <- c("Sponsors", "Sponsors", "Does not sponsor", "Sponsors", "Sponsors", "Does not sponsor")
+kable(cbind(names, nolobby, lobby),
+      col.names = c("Representative", "Not lobbied", "Lobbied"),
+      align = "cccc") %>%
+  column_spec(1, width = "1.5cm") %>%
+  column_spec(2, color = c("white", "white", "white", "white", "white", "white"), background = c("green", "green", "grey20", "green", "green", "grey20"), width = "6cm") %>%
+  column_spec(3, color = c("white", "white", "white", "white", "white", "white"), background = c("green", "green", "grey20", "green", "green", "grey20"), width = "6cm") %>%
+  add_header_above(c(" " = 1, "Potential outcomes" = 2)) %>%
+  kable_styling(font_size = 28)
+```
+
+## We think they look more like this
+
+```{r}
+names <- c("Rep 1", "Rep 2", "Rep 3", "Rep 4", "Rep 5", "Rep 6")
+nolobby <- c("Sponsors", "Does not sponsor", "Does not sponsor", "Sponsors", "Does not sponsor", "Does not sponsor")
+lobby <- c("Sponsors", "Sponsors", "Does not sponsor", "Sponsors", "Sponsors", "Does not sponsor")
+kable(cbind(names, nolobby, lobby),
+      col.names = c("Representative", "Not lobbied", "Lobbied"),
+      align = "cccc") %>%
+  column_spec(1, width = "1.5cm") %>%
+  column_spec(2, color = c("white", "white", "white", "white", "white", "white"), background = c("green", "grey20", "grey20", "green", "grey20", "grey20"), width = "6cm") %>%
+  column_spec(3, color = c("white", "white", "white", "white", "white", "white"), background = c("green", "green", "grey20", "green", "green", "grey20"), width = "6cm") %>%
+  add_header_above(c(" " = 1, "Potential outcomes" = 2)) %>%
+  kable_styling(font_size = 28)
+```
+
+## The fundamental problem of causal inference
+
+- We can only *observe* one potential outcome per legislator
+- So we can't know which situation we're in!
+- But we can ask:
+
+:::{.fragment}
+*How likely is it that we would have seen an estimate this large if Sarah were right about the legislators' potential outcomes?*
+:::
+
+## Let's put ourselves in Sarah's shoes
+
+- Sarah thinks all the potential outcomes in this study are **equal for a given person**
+- She thinks the only reason we see the social lobbying group be more supportive of the bill is that the supporters got assigned to the social lobbying group by **random chance**
+- This is the **null hypothesis**
+- According to Sarah, if we re-randomize our data, we should often get estimates just as big as the one we got due to random noise!
+
+## Re-randomizing the data
+
+```{webr}
+# Function to re-randomize, or "shuffle", the treatment variable
+re.randomize <- function(input.data) {
+    input.data$treat <- sample(input.data$treat)
+    return(input.data)
+}
+head(re.randomize(data))
+```
+
+## Computing the effect of social lobbying
+
+```{webr}
+compute.social.lobby.effect <- function(input.data) {
+    estimate <- difference_in_means(supportgroup ~ treat, 
+                                    input.data,
+                                    condition1 = 'control', 
+                                    condition2 = 'sociallobby')$coefficients
+    
+    return(as.numeric(estimate))
+}
+
+actual.estimate <- compute.social.lobby.effect(data)
+actual.estimate
+```
+
+## Let's use this function a few times
+
+```{webr}
+compute.social.lobby.effect(re.randomize(data))
+compute.social.lobby.effect(re.randomize(data))
+compute.social.lobby.effect(re.randomize(data))
+compute.social.lobby.effect(re.randomize(data))
+compute.social.lobby.effect(re.randomize(data))
+```
+
+## Let's use this function 50,000 times
+
+```{webr}
+library(ggplot2)
+simulations <- replicate(50000, compute.social.lobby.effect(re.randomize(data)))
+qplot(simulations, binwidth = .025) + geom_vline(xintercept = actual.estimate, color = 'red')
+```
+
+## What % of simulations were at least as large as the one we got?
+
+```{webr}
+simulations.at.least.as.large <- subset(simulations, simulations >= actual.estimate)
+length(simulations.at.least.as.large)
+length(simulations)
+```
+
+## Hang on, we got something different from `difference_in_means()`
+
+```{webr}
+length(simulations.at.least.as.large) / length(simulations)
+
+difference_in_means(supportgroup ~ treat, 
+                     data, 
+                     condition1 = 'control',
+                     condition2 = 'sociallobby')
+```
+
+## There are two sides to this plot...
+
+```{webr}
+qplot(simulations, binwidth = .025) + 
+  geom_vline(xintercept = actual.estimate, color = 'red') +
+  geom_vline(xintercept = -actual.estimate, color = 'blue')
+```
+
+## Interpreting these different $p$-values
+
+- There's only about a 6.8% chance we would see an estimate **as large or larger** as the one we saw if the treatment had no effect
+- There's only about a 13.5% chance we would see an estimate **as large or larger IN MAGNITUDE** as the one we saw if the treatment had no effect
+- For this class, we will mostly use larger **in magnitude** (*i.e.,* $p$-values from `difference_in_means()` will always work)
+
+## Revisiting interpretations of $p$-values
+
+- $p<0.5$ means, **by arbitrary convention,** we call the null hypothesis **"rejected"**
+  - In an experiment, we reject that the treatment had no effect
+- BUT a significant $p$-value doesn't mean the null hypothesis is *necessarily* false!
+- AND a non-significant $p$-value doesn't *necessarily* mean a treatment doesn't work!
+- Our estimate is still our best guess.
+
+## Reviewing concepts and terms {.smaller}
+
+- **$p$-value** the probability we would see an estimate as large or larger as the one we did, *if* a skeptic were correct that the treatment had no effect.
+  - Does *not* measure *not* the probability that the treatment had no effect.
+  - Does *not* measure the probability that the treatment had an effect.
+  - Helps answer a skeptic of a treatment by telling them how likely it is we would see the effect *estimate* we did if the treatment actually had no effect.
+- **Statistical significance:** a $p$-value less than 0.05. This is an arbitrary threshold social scientists have agreed upon as a standard for *strong statistical evidence* that a treatment has an effect.
+
+## Remember:{.smaller}
+
+:::{.columns}
+:::{.column width=50%}
+**If you have a significant $p$-value...**
+
+:::{.fragment}
+this does *not* mean the treatment definitely has an effect. There's still a chance of getting a statistically significant result even if the treatment has no effect, but we've decided that chance is small enough to consider the null incorrect.
+:::
+
+:::
+:::{.column width=50%}
+**If you have a non-significant $p$-value...**
+
+:::{.fragment}
+this does *not* mean that the treatment *definitely does not* have an effect. The treatment might have an effect but the sample size is too small (and the standard error too large) to demonstrate the effect due to chance. **The estimate is still our best guess!**
+:::
+
+:::
+:::
+
+# Notebook time

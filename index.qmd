@@ -46,3 +46,4 @@ format: html
 # Week 9
 
 - [Week 9, Lecture 1: $p$-values in Experiments](Lectures/week9/week9lecture1.html){target="_blank"}
+- [Week 9, Lecture 2: Confidence Intervals](Lectures/week9/week9lecture2.html){target="_blank"}

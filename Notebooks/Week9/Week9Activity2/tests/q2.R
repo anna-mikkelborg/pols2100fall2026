@@ -11,7 +11,7 @@ test = list(
                                               condition1 = 'control',
                                               condition2 = 'supply')$conf.high )
         testthat::expect_true(question.correct,
-                                    info = "Answer doesn't look right. Take a look at the R Cheat Sheet for a reminder. Are you using the supply.vs.control variable?")
+                                    info = "Answer doesn't look right. Are you using the supply.vs.control variable?")
       }
     )
   )

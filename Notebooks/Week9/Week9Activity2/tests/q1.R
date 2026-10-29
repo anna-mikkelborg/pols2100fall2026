@@ -11,7 +11,7 @@ test = list(
                                               condition1 = 'control',
                                               condition2 = 'supply') ) 
         testthat::expect_true(question.correct,
-                                    info = "Answer doesn't look right. Take a look at the R Cheat Sheet on how to use difference_in_means().")
+                                    info = "Answer doesn't look right. Make sure you've set up your difference_in_means() correctly.")
       }
     )
   )

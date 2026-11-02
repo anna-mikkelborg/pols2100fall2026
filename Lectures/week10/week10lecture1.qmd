@@ -153,12 +153,12 @@ data.not.salt.lake <- subset(data, county != 'Salt Lake')
 ## Another example: drug trials
 
 - Well-known medical finding: aspirin is an effective treatment after heart attacks
-- *The Lancet* agreed to publish this finding, but wanted an analysis of heterogeneous treatment effects
+- Back in 1988, *The Lancet* agreed to publish this finding, but wanted an analysis of heterogeneous treatment effects
 - The researchers resisted, but eventually published the article as requested, with one addition...
 
 ---
 
-> "Subdivision of the patients... with respdect to their astrological birth signs appears to indicate that for patients born under Gemini or Libra there was a slightly *adverse* effect of aspirin on mortality (9%, NS), while for patients born under all other astrological signs there was a strikingly *beneficial* effect (28%, $p$<0.00001)" (ISIS-2 Collaborative Group 1988).
+> "Subdivision of the patients... with respect to their astrological birth signs appears to indicate that for patients born under Gemini or Libra there was a slightly *adverse* effect of aspirin on mortality (9%, NS), while for patients born under all other astrological signs there was a strikingly *beneficial* effect (28%, $p$<0.00001)" (ISIS-2 Collaborative Group 1988).
 
 ## Takeaways
 

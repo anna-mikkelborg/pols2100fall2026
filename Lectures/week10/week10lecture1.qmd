@@ -1,0 +1,169 @@
+---
+title: "Heterogeneous Treatment Effects"
+subtitle: "Week 10 Lecture 1"
+format: 
+  live-revealjs:
+    slide-number: true
+    show-slide-number: all
+    incremental: true
+engine: knitr
+resources:
+  - electing_women.csv
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+## Where we have been
+
+- Weeks 2-3: looking at data
+- Weeks 4-5: the scientific process
+- Weeks 6-7: causal inference
+- Weeks 8-9: quantifying uncertainty
+- Good news: we've covered the most difficult content in POLS 2100!
+  - The rest of the semester: *applying* these tools in different ways
+  
+## Today: heterogeneous treatment effects
+
+- **Heterogeneous** = "different"
+- **Heterogeneous treatment effects:** different treatment effects among different subgroups of observations
+- *You have already looked at heterogeneous treatment effects!*
+- Problem Set 1: DeShawn vs. Jake response rates among Republicans, white Democrats, and non-white Democrats
+
+## How to compute heterogeneous treatment effects
+
+1. Save a new subset with just the subgroup of observations you want to look at effects among.
+2. Use `difference_in_means()`, but passing `data = name.of.the.subset`.
+3. Repeat for each subgroup you want to compare!
+
+# ⚠️ Heterogeneous treatment effects are observational/ descriptive, not experimental/causal comparisons ⚠️
+
+## Recall: causality = the difference between potential outcomes
+
+:::{.fragment}
+```{r}
+library(knitr)
+library(kableExtra)
+
+results <- data.frame(
+  Legislator = c("A", "B", "C", "D"),
+  Jake = c(0, 1, 1, 0),
+  DeShawn = c(0, 0, 1, 0),
+  Effect = c(0, -1, 0, 0)
+)
+
+kable(results, format = "html", escape = FALSE,
+      col.names = c("Legislator", "Respond to<br>Jake Alias",
+                    "Respond to<br>DeShawn Alias", "Treatment Effect"),
+      align = c("l", "c", "c", "c")) %>%
+  kable_styling(font_size = 25, full_width = FALSE)
+```
+
+:::
+
+## Now, we want to find the average treatment effect among *subgroups*
+
+```{r}
+library(knitr)
+library(kableExtra)
+
+results <- data.frame(
+  Legislator = c("A", "B", "C", "D"),
+  Subgroup = c("California", "California", "Virginia", "Virginia"),
+  Jake = c(0, 1, 1, 0),
+  DeShawn = c(0, 0, 1, 0),
+  Effect = c(0, -1, 0, 0)
+)
+
+kable(results, format = "html", escape = FALSE,
+      col.names = c("Legislator", "Subgroup", "Respond to<br>Jake Alias",
+                    "Respond to<br>DeShawn Alias", "Treatment Effect"),
+      align = c("l", "l", "c", "c", "c")) %>%
+  kable_styling(font_size = 25, full_width = FALSE) %>%
+  row_spec(2, extra_css = "border-bottom: 1px solid black;")
+```
+
+:::{.fragment}
+We are simply *describing* treatment effects within different subgroups, *not* claiming that being a California legislator *causes* legislators to discriminate.
+:::
+
+## That wouldn't really make sense
+
+```{r}
+library(knitr)
+library(kableExtra)
+
+results <- data.frame(
+  Legislator = c("A", "B"),
+  California = c(0, -1),
+  Virginia = c(0, 0)
+)
+
+kable(results, format = "html", escape = FALSE,
+      col.names = c("Legislator",
+                    "Treatment Effect<br>if in California<br>(What we saw)",
+                    "Treatment Effect<br>if in Virginia<br>(Counterfactual)"),
+      align = c("l", "c", "c")) %>%
+  kable_styling(font_size = 25, full_width = FALSE)
+```
+
+:::{.fragment}
+We would never manipulate which state a given legislator is from; describing differences across states is more useful in the real world!
+:::
+
+## Back to the Utah precinct chair experiment from last week
+
+```{webr}
+#| message: false
+#| warning: false
+suppressMessages(library(estimatr))
+
+data <- read.csv("electing_women.csv")
+head(data)
+table(data$mormon) # you will use this in your notebook today!
+```
+
+## Salt Lake vs. other counties
+
+```{webr}
+table(data$county)
+data.salt.lake <- subset(data, county == 'Salt Lake')
+data.not.salt.lake <- subset(data, county != 'Salt Lake')
+# difference_in_means(prop_sd_fem2014 ~ treat, data = data.salt.lake,
+#                     condition1 = 'control', condition2 = 'both')
+# difference_in_means(prop_sd_fem2014 ~ treat, data = data.not.salt.lake,
+#                     condition1 = 'control', condition2 = 'both')
+```
+
+## Interpreting our findings
+
+- Effects are bigger outside of Salt Lake County
+- NOT the same as saying that being outside SLC **causes** the effect to be bigger.
+- Busing precinct chairs into/out of Salt Lake County would probably not make them more or less responsive to the treatment!
+  - Likely **omitted variable bias**
+- This might still be very useful descriptive information!
+  - *e.g.,* you can only afford to send letters to some counties --- where do you send them?
+  
+## Heterogeneous treatment effects and $p$-hacking
+
+- **$p$-hacking:** testing lots and lots of hypotheses until one test yields $p<0.05$
+- But $p = 0.05$ means there's a 1-in-20 chance that the result could have occurred by chance!
+- So if you do 20 tests, odds are you'll get at least one $p<0.05$ just by chance.
+- Examining heterogeneous treatment effects raises the risk of $p$-hacking because there are so many subgroups you could theoretically examine.
+
+## Another example: drug trials
+
+- Well-known medical finding: aspirin is an effective treatment after heart attacks
+- *The Lancet* agreed to publish this finding, but wanted an analysis of heterogeneous treatment effects
+- The researchers resisted, but eventually published the article as requested, with one addition...
+
+---
+
+> "Subdivision of the patients... with respdect to their astrological birth signs appears to indicate that for patients born under Gemini or Libra there was a slightly *adverse* effect of aspirin on mortality (9%, NS), while for patients born under all other astrological signs there was a strikingly *beneficial* effect (28%, $p$<0.00001)" (ISIS-2 Collaborative Group 1988).
+
+## Takeaways
+
+- Heterogeneous treatment effects can be incredibly useful **descriptive** quantities...
+- But we cannot infer a causal effect of subgroup membership...
+- And the more subgroups you analyze, the less a $p<0.05$ finding means.
+
+# Notebook time

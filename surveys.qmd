@@ -1,0 +1,16 @@
+---
+title: "POLS 2100 surveys"
+format: html
+---
+
+<!-- Ty, Moasiah, Stella, and Julien -->
+[Survey 1](https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=S-t2AwbCVkCQYeNC3C7NqF109P9H8bJEihoxmhsxJE9UNzFDS0tSR09QTVFQR1MwQjhJMzlLWEhaWi4u){target="_blank"}
+
+<!-- Emma, Airi, Bennett, and David -->
+[Survey 2](https://docs.google.com/forms/d/1-NcCyyliPTF0HrMulzsd9p9k1htv2SPOQRlu0sU16pA/edit)
+
+<!-- Theophile, Aiden, Rory, Elise -->
+[Survey 3](https://docs.google.com/forms/d/e/1FAIpQLSci23V-8lv6k2NYaptrNYaFNSFfijl5k2i_OEKfguxesyxjhQ/viewform)
+
+<!-- Harry, Levon, Amber, Luke, Andrea -->
+[Survey 4](https://docs.google.com/forms/d/e/1FAIpQLSeld3pK85rrHK0lEHn1fcaKU4OugqgPtb22afCsuFa0X7M1Zg/viewform?usp=header)

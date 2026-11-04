@@ -1,0 +1,34 @@
+---
+title: "Generalizability"
+subtitle: "Week 10 Lecture 2"
+format: 
+  live-revealjs:
+    slide-number: true
+    show-slide-number: all
+    incremental: true
+engine: knitr
+resources:
+  - electing_women.csv
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+# Reminder
+
+Problem Set 3 due tomorrow
+
+## Your research project
+
+- Data collection today! Will be done by 5:20
+- Next steps:
+  - First draft report (solo) due Friday of Week 12 (11/20)
+  - Group presentations in class Week 15 (12/8, 12/10)
+  - Final draft report (solo) due Wednesday of finals week (12/16)
+  
+## What you will need to do
+
+- Enter your dataset into Excel or Google Sheets
+- Re-code variables if needed
+- Save your dataset as a .csv file
+- Access the research report Jupyter notebook
+- Upload your .csv file to Jupyterhub in the same folder as the notebook

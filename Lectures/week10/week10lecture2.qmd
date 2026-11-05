@@ -45,7 +45,7 @@ Problem Set 3 due tomorrow
 ## Generalizability
 
 - From Week 4: theories should explain as broad a class of phenomena as possible
-- When we do experiments, we learn about the effect of the *particular treatment studied...
+- When we do experiments, we learn about the effect of the *particular* treatment studied...
   - Among the *people* the experiment was conducted among...
   - *At the time/in the context* in which the experiment was conducted.
 - But we often want to know if the treatment would work beyond this narrow scope!
@@ -57,7 +57,7 @@ Problem Set 3 due tomorrow
 - **Time/context:** The social pressure experiment was conducted in an off-year primary election. Would the effects be different in a presidential general election?
 - With the last two, we are effectively asking how **heterogeneous** we would expect treatment effects to be.
 
-## Why might effects not generalize perfectly?
+## Why might effects *not* generalize?
 
 - Imagine an experiment done in the 2020 election in Wyoming and Wisconsin
 - By 2020, social pressure mailers were very common --- swing state voters (like Wisconsinites) were receiving a lot of them
@@ -102,7 +102,7 @@ kable(results, escape = FALSE,
 
 ```{webr}
 suppressMessages(library(estimatr))
-library(ggplot2)
+suppressMessages(library(ggplot2))
 
 data <- read.csv("KB_campaign.csv")
 head(data)
@@ -187,8 +187,49 @@ example.data$precision <-
 ```{webr}
 # unweighted average estimate
 mean(example.data$estimate)
-# WEIGHTED average estimate
+# PRECISION-WEIGHTED average estimate
 weighted.mean(example.data$estimate, example.data$precision)
 ```
 
+## The `weighted.mean()` command
+
+Basic recipe:
+
+`weighted.mean(dataset.name$main.variable.name, dataset.name$weighting.variable.name)`
+
+- Data weights are used in many applications!
+- *e.g.,* to make campaign polls more representative...
+- In this class, weights will always be provided for you
+
 ## Back to our campaign persuasion example
+
+```{webr}
+# precision-weighted effect across studies
+weighted.mean(data$effect, data$precision)
+
+# let's compare effects in primary vs. general elections
+primaries <- subset(data, Primary == 1)
+general.elections <- subset(data, General == 1)
+```
+
+## Understanding *why* effects vary
+
+*Why are the effects of campaign persuasion larger in primaries than in general elections?*
+
+- Party loyalty?
+- Campaign spending?
+- Meta-analyses can prompt us to develop more nuanced theories and hypotheses!
+- We can then design new studies to test those theories
+  - E.g., do a survey experiment where we manipulate *whether voters receive party information.*
+  
+## Summing up
+
+- The best theories are **general**
+- So we hope our empirical findings will **generalize**
+  - To other, similar treatments
+  - To other people/groups/units
+  - To other places/contexts
+- Meta-analyses help us test this
+- Precision-weighting accounts for varying levels of uncertainty across studies
+
+# Notebook + survey time!

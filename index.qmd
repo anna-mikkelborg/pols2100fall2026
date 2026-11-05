@@ -51,3 +51,4 @@ format: html
 # Week 10
 
 - [Week 10, Lecture 1: Heterogeneous treatment effects](Lectures/week10/week10lecture1.html){target="_blank"}
+- [Week 10, Lecture 2: Generalizability](Lectures/week10/week10lecture2.html){target="_blank"}

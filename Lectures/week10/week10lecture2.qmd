@@ -27,8 +27,168 @@ Problem Set 3 due tomorrow
   
 ## What you will need to do
 
-- Enter your dataset into Excel or Google Sheets
-- Re-code variables if needed
-- Save your dataset as a .csv file
-- Access the research report Jupyter notebook
-- Upload your .csv file to Jupyterhub in the same folder as the notebook
+- If needed, enter your data into Excel or Google Sheets
+- Make a copy of the raw dataset. In the copy:
+  - Rename your variables
+  - Recode variables if needed
+- Save your cleaned dataset as a .csv file
+- Access the [research report Jupyter notebook](https://jupyter.lmu.edu/hub/user-redirect/git-pull?repo=https://github.com/anna-mikkelborg/pols2100fall2026&urlpath=lab/tree/pols2100/FinalProject/POLS2100_Final_Project.ipynb&branch=main&targetpath=pols2100 
+)
+- Upload your .csv file to JupyterLab in the same folder as the notebook
+
+## Let's see how it works
+
+![https://forms.gle/bDbENN9A52i1Ln5r9](example_survey.png)
+
+# Now on to today's topic...
+
+## Generalizability
+
+- From Week 4: theories should explain as broad a class of phenomena as possible
+- When we do experiments, we learn about the effect of the *particular treatment studied...
+  - Among the *people* the experiment was conducted among...
+  - *At the time/in the context* in which the experiment was conducted.
+- But we often want to know if the treatment would work beyond this narrow scope!
+
+## Examples
+
+- **Treatment:** Problem Set 3 looks at the effect of a "gentle" social pressure mailer. What if we made it even more subtle?
+- **People:** Would the effects of the "both" condition among Utah Republican precinct chairs be similar if we tested it on Democratic precinct chairs? Republican chairs in other states?
+- **Time/context:** The social pressure experiment was conducted in an off-year primary election. Would the effects be different in a presidential general election?
+- With the last two, we are effectively asking how **heterogeneous** we would expect treatment effects to be.
+
+## Why might effects not generalize perfectly?
+
+- Imagine an experiment done in the 2020 election in Wyoming and Wisconsin
+- By 2020, social pressure mailers were very common --- swing state voters (like Wisconsinites) were receiving a lot of them
+
+:::{.fragment}
+```{r}
+library(knitr)
+library(kableExtra)
+
+results <- data.frame(
+  State = c("Wyoming", "Wisconsin"),
+  Control = c(0, 17),
+  Treatment = c(1, 18)
+)
+
+kable(results, escape = FALSE,
+      col.names = c("", "Control", "Treatment"),
+      align = c("l", "c", "c")) %>%
+  add_header_above(
+    c(" " = 1, "Average Number of Social Pressure Mailers Received" = 2),
+    escape = FALSE
+  ) %>%
+  kable_styling(font_size = 25, full_width = FALSE) %>%
+  row_spec(0, bold = TRUE)
+```
+
+:::
+
+:::{.fragment}
+*Would you expect the researchers' mailer to be equally effective in both states?*
+:::
+
+---
+
+## Evaluating genalizability
+
+- **Meta-analysis:** looking across the results of many similar experiments to see how the results vary.
+- An analysis of analyses!
+- Only works with questions that have been studied multiple times in different contexts
+
+## Campaign persuasion meta-analysis
+
+```{webr}
+suppressMessages(library(estimatr))
+library(ggplot2)
+
+data <- read.csv("KB_campaign.csv")
+head(data)
+```
+
+## Codebook
+
+```{r}
+vars <- data.frame(
+  Variable = c(
+    "Experiment", "effect", "SE", "precision",
+    "General", "Primary", "Treatment.within.2months.of.election"
+  ),
+  Description = c(
+    "Paper reference of the experiment",
+    "Estimate of the effect size",
+    "Standard error of the effect estimate",
+    "Precision of the estimate, defined as 1 / SE<sup>2</sup> (used as weights)",
+    "1 if the experiment took place in a general election, 0 if not",
+    "1 if the experiment took place in a primary election, 0 if not (primary elections typically receive less attention)",
+    "1 if the experiment took place within 2 months of election day, 0 if more than 2 months before"
+  )
+)
+
+kable(vars, format = "html", escape = FALSE,
+      col.names = c("Variable", "Description")) %>%
+  kable_styling(font_size = 16, full_width = FALSE) %>%
+  column_spec(1, monospace = TRUE, width = "6.5cm") %>%
+  column_spec(2, width = "10cm")
+```
+
+## Meta-analysis using weighted averages
+
+```{webr}
+# could just look at the average effect:
+mean(data$effect)
+
+# but some experiments have much more noise than others
+qplot(data$SE)
+```
+
+## Why weight
+
+- When we conduct meta-analyses, we *weight* our estimates by how **precise** they are (*i.e.,* how little noise they have)
+
+:::{.fragment}
+```{r}
+library(knitr)
+library(kableExtra)
+
+results <- data.frame(
+  Experiment = c("Experiment 1: Letter A", "Experiment 2: Letter B"),
+  Estimate = c("8%", "5%"),
+  SE = c("30%", "1%"),
+  CI = c("[-50%, 66%]", "[3%, 7%]")
+)
+
+kable(results, format = "html", escape = FALSE,
+      col.names = c("Experiment", "Estimate", "Standard Error",
+                    "95% Confidence<br>Interval"),
+      align = c("l", "l", "l", "l")) %>%
+  kable_styling(font_size = 23, full_width = FALSE) %>%
+  column_spec(1, bold = TRUE) %>%
+  row_spec(0, bold = TRUE, align = "c")
+```
+
+:::
+
+- We want to weight the experiment with the smaller standard error more heavily!
+
+## Calculating precision weights
+
+$precision = \frac{1}{\text{Standard Error}^2}$
+
+```{webr}
+example.data <- data.frame(experiment = c("A","B"), estimate = c(8, 5), SE = c(30, 1))
+example.data
+# let's create a precision column (1/SE^2)
+example.data$precision <- 
+```
+
+```{webr}
+# unweighted average estimate
+mean(example.data$estimate)
+# WEIGHTED average estimate
+weighted.mean(example.data$estimate, example.data$precision)
+```
+
+## Back to our campaign persuasion example

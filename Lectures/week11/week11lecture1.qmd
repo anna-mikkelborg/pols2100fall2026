@@ -1,0 +1,42 @@
+---
+title: "Describing Populations"
+subtitle: "Week 11 Lecture 1"
+format: 
+  live-revealjs:
+    slide-number: true
+    show-slide-number: all
+    incremental: true
+engine: knitr
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+## We have been focusing on **causal inference**
+
+*Does attending a training cause more women to run for office?*
+
+```{r}
+library(knitr)
+library(kableExtra)
+group <- c(rep("Attended training", 3), rep("Did not attend", 3), "")
+names <- c("Olivia", "Katie", "Ashlynd", "Camille", "Christina", "Ivy", "Fraction running")
+attended <- c("Ran for office", "Ran for office", "Ran for office", "???", "???", "???", "3/3")
+didnt <- c("???", "???", "???", "Ran for office", "Did not run", "Did not run", "1/3")
+kable(cbind(names, group, attended, didnt),
+      col.names = c("Person", "Treatment", "Attended", "Did not attend"),
+      align = "cccc") %>%
+  column_spec(1, width = "1.5cm") %>%
+  column_spec(2, width = "1.8cm") %>%
+  column_spec(3, color = c("white", "white", "white", "black", "black", "black", "black"), background = c("green", "green", "green", "#FFFFFF00", "#FFFFFF00", "#FFFFFF00", "#FFFFFF00"), width = "6cm") %>%
+  column_spec(4, color = c("black", "black", "black", "white", "white", "white", "black"), background = c("#FFFFFF00", "#FFFFFF00", "#FFFFFF00", "green", "grey20", "grey20", "#FFFFFF00"), width = "6cm") %>%
+  row_spec(7, color = "white") %>%
+ collapse_rows(columns = 2, valign = "middle") %>%
+  add_header_above(c(" " = 2, "Potential outcomes" = 2)) %>%
+  kable_styling(font_size = 25)
+```
+
+:::{.fragment}
+Main estimand of interest: the **average treatment effect**
+:::
+
+## From causal inference to *describing populations*

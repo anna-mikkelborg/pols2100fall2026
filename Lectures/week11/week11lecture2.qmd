@@ -13,6 +13,28 @@ resources:
 
 {{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
 
+## Upcoming deadline
+
+- Final project first draft report due a week from tomorrow (11/20)
+- This is a **solo** assignment
+- But you may *clean* your dataset as a group
+
+## [What goes into the research report](https://docs.google.com/document/d/1Z8P7PRylnem_80WCK1jyrQAhdzVqMWVq9F9EQz_xbDE/edit?usp=sharing) {.smaller}
+
+1. A description of your hypothesis
+2. A description of your research design
+3. A description of the sample: who is your average study participant?
+  - `mean()` and `table()` will be useful here
+4. At least three different statistical tests/procedures
+  - Differences-in-means (whole dataset and/or subsets; each counts as 1)
+  - Regressions (you'll learn this on Tuesday!)
+  - `mean()`, `subset()`, `table()`, and `ggplot()` are not statistical tests/procedures
+5. Explanations of each of your statistical tests
+6. An interpretation of the results and what they indicate about your hypothesis
+7. An explanation of the limitations of your study (types of bias?)
+
+# 10-minute check in: how are your data looking?
+
 ## Descriptive hypotheses
 
 - On Tuesday, we learned how to look at *levels* of variables
@@ -25,7 +47,11 @@ resources:
 
 We can use `difference_in_means()` to estimate a difference between two groups with weights:
 
-`difference_in_means(outcome ~ group.variable.name, data = dataset.name, weight = weight.variable.name)`
+```{r echo = T, eval = F}
+difference_in_means(outcome ~ group.variable.name, 
+                    data = dataset.name, 
+                    weight = weight.variable.name)
+```
 
 - In this example, `group.variable.name` and `weight.variable.name` are two columns in a dataset called `dataset.name`.
 - Where are `condition1 = ` and `condition2 = `? 

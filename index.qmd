@@ -57,3 +57,7 @@ format: html
 
 - [Week 11, Lecture 1: Describing populations](Lectures/week11/week11lecture1.html){target="_blank"}
 - [Week 11, Lecture 2: Descriptive hypothesis testing](Lectures/week11/week11lecture2.html){target="_blank"}
+
+# Week 12
+
+- [Week 12, Lecture 1: Bivariate regression](Lectures/week12/week11lecture2.html){target="_blank"}

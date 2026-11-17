@@ -60,4 +60,4 @@ format: html
 
 # Week 12
 
-- [Week 12, Lecture 1: Bivariate regression](Lectures/week12/week11lecture2.html){target="_blank"}
+- [Week 12, Lecture 1: Bivariate regression](Lectures/week12/week12lecture1.html){target="_blank"}
